@@ -1,0 +1,6 @@
+
+# About the Authors {-}
+
+Jeffrey Boichuk (<link>) is ... 
+
+Steven Mortimer (<link>) is ... 

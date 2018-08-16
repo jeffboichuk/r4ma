@@ -1,6 +1,6 @@
 book_filename: "r4ma"
 new_session: yes
-
+output_dir: "docs"
 rmd_files: [
   "index.rmd",
   "00-author.Rmd",
@@ -11,6 +11,5 @@ rmd_files: [
   "05-summary.Rmd",
   "06-references.Rmd",
 ]
-
 before_chapter_script: "_common.R"
 delete_merged_file: true
