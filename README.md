@@ -1,2 +1,2 @@
 # r4ma
-R for marketing analytics
+R for Marketing Analytics
