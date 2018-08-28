@@ -3,13 +3,18 @@ new_session: yes
 output_dir: "docs"
 rmd_files: [
   "index.rmd",
-  "00-author.Rmd",
-  "01-intro.Rmd",
-  "02-literature.Rmd",
-  "03-method.Rmd",
-  "04-application.Rmd",
-  "05-summary.Rmd",
-  "06-references.Rmd",
+  "00-preface.Rmd",
+  "01-marketing.Rmd",
+  "02-tools.Rmd",
+  "03-dataviz.Rmd",
+  "04-transformation.Rmd",
+  "05-relational.Rmd",
+  "06-measures.Rmd",
+  "07-fieldexp.Rmd",
+  "08-mix.Rmd",
+  "09-trade.Rmd",
+  "10-machinelearning.Rmd",
+  "11-action.Rmd",
 ]
 before_chapter_script: "_common.R"
 delete_merged_file: true
