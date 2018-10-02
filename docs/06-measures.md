@@ -2,8 +2,16 @@
 # Measures in Marketing {#measures}
 
 
-THINGS PROVIDED BELOW THIS LINE ARE FOR EXAMPLE ONLY. NOT REAL CONTENT
+The major topic areas are provided below.
 
 ***
 
-Test
+## Net Promoter Score
+
+ Other measure types Likert Scale, Distributionally, Mean, Top 2 Box
+
+## Customer Lifetime Value
+
+## Customer Satisfaction/Customer Delight
+
+## Others? Consult AMA dictionary for more?

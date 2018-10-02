@@ -1,12 +1,22 @@
 # Preparing and Transforming Data {#transformation}
 
 
-THINGS PROVIDED BELOW THIS LINE ARE FOR EXAMPLE ONLY. NOT REAL CONTENT
+The major topic areas are provided below.
 
 ***
 
-Some _significant_ applications are demonstrated in this chapter.
+## Selecting
 
-## Example one
+## Mutating
 
-## Example two
+Excel Conversion
+IF -> `ifelse()`
+VLOOKUP -> `left_join()`
+
+## Summarizing
+
+Excel Conversion
+COUNTIF/SUMIF/PIVOT -> `group_by()` + `summarize()`
+
+## Functions
+

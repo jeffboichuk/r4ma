@@ -5,6 +5,8 @@ THINGS PROVIDED BELOW THIS LINE ARE FOR EXAMPLE ONLY. NOT REAL CONTENT
 
 ***
 
+New Content
+
 You can label chapter and section titles using `{#label}` after them. If you do not manually label them, there will be automatic labels anyway, e.g., Chapter \@ref(measures).
 
 Figures and tables with captions will be placed in `figure` and `table` environments, respectively.

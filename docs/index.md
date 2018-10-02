@@ -22,7 +22,7 @@ description: "This is a minimal example of using the bookdown package to write a
 
 
 
-# Preface {-}
+# Welcome {-}
 
 This is the front page of the book. Probably include a cover image here and abstract/summary.
 

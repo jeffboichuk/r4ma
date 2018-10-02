@@ -1,9 +1,17 @@
 
-# Marketing Data Visualizations {#dataviz}
+# Data Visualizations {#dataviz}
 
 
-THINGS PROVIDED BELOW THIS LINE ARE FOR EXAMPLE ONLY. NOT REAL CONTENT
+The major topic areas are provided below.
 
 ***
 
-We describe our methods in this chapter.
+## Intro
+
+## First Steps
+
+## Geoms and Aesthetics (aes)
+
+## Facets
+
+## Chart Types

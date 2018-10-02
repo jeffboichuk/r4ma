@@ -37,7 +37,7 @@ lapply(c('DT', 'citr', 'formatR', 'svglite'), function(pkg) {
 })
 ```
 
-# Preface {-}
+# Welcome {-}
 
 This is the front page of the book. Probably include a cover image here and abstract/summary.
 
