@@ -60,6 +60,16 @@ in your summarizes, just how a Pivot Table allows you to identify variables to
 filter on. In a general sense, filtering just means that you remove any rows from a 
 dataset that meet a certain criteria. 
 
+## Spread and Gather
+
+One particular type of transformation is moving the data between a long format and 
+a wide format. In the long format you have one row per value where the values may 
+be a different group or metric as indicated by another column in the data. For example, 
+
+[INCLUDE LONG EXAMPLE]
+
+This is the preferred 
+
 ## Functions
 
 In some cases
