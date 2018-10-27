@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-principles.html">
-<link rel="next" href="joins.html">
+<link rel="prev" href="adding-labels-axes-and-legends.html">
+<link rel="next" href="chart-types.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -165,19 +165,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="relational-structures" class="section level2">
-<h2><span class="header-section-number">5.2</span> Relational Structures</h2>
-<p>data integrity, the role of keys, ER diagram</p>
-<p>spread, gather conversation with normalization backdrop</p>
-<p>Excel Conversion IF -&gt; <code>ifelse()</code> VLOOKUP -&gt; <code>left_join()</code></p>
+<div id="faceting-data-by-group" class="section level2">
+<h2><span class="header-section-number">3.4</span> Faceting Data by Group</h2>
+<p>A common research question is comparing a response across groups. The best way to visualize these relationships is to use the <code>facet_grid()</code> function. A facet creates a panel of plots with one for each value in the grouping variable. In the example below we have created a histogram for each Species in the iris dataset (<strong>NOTE: REPLACE WITH MKTING EXAMPLE</strong>).</p>
+<p>One important aspect to remember when creating facet charts is the scale of the axes. You can accidentally, and purposefully, mislead readers by having the same metric plotted on two different axis scales. <strong>IS THIS THE default behavior for the <code>facet_grid()</code></strong></p>
+<p>The syntax for facetting data has changed over time, from formula notation to a newer style. You may see examples online that use this older notation like so <code>facet_grid(.~var)</code>. This is equivalent to <code>facet_grid(cols=vars(var))</code>.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-principles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="joins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="adding-labels-axes-and-legends.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chart-types.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -207,7 +207,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jeffboichuk/r4ma/edit/master/05-relational.Rmd",
+"link": "https://github.com/jeffboichuk/r4ma/edit/master/03-dataviz.Rmd",
 "text": "Edit"
 },
 "download": ["r4ma.pdf", "r4ma.epub", "r4ma.mobi"],

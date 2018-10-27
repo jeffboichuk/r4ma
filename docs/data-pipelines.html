@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-principles.html">
-<link rel="next" href="joins.html">
+<link rel="prev" href="datatransformation.html">
+<link rel="next" href="selecting.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -165,19 +165,31 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="relational-structures" class="section level2">
-<h2><span class="header-section-number">5.2</span> Relational Structures</h2>
-<p>data integrity, the role of keys, ER diagram</p>
-<p>spread, gather conversation with normalization backdrop</p>
-<p>Excel Conversion IF -&gt; <code>ifelse()</code> VLOOKUP -&gt; <code>left_join()</code></p>
+<div id="data-pipelines" class="section level2">
+<h2><span class="header-section-number">4.1</span> Data Pipelines</h2>
+<p>Before diving into the functions designed to help you transform data, we must cover a perculiar looking operator, the pipe or <code>%&gt;%</code>. You will repeatedly see the pipe (<code>%&gt;%</code>) used in the code examples for this chapter and in other parts of the book. This operator takes output from the function on its left side and passes it onto the function on its right side. As an example we will look at the <code>select()</code> function. The first argument in the function is <code>.data</code>. Whenever you use the pipe operator it will pass that output into the function’s first argument, which in this case, is a <code>tbl_df</code>. This means that we must put a <code>tbl_df</code> object (a dataset) on the left side of the pipe operator and then the <code>select()</code> function on the right. The first argument is assumed to be the data, so the remaining argument inside the function, according to the documentation, should be one or more unquoted variable names or numbers representing the position of columns. If we put this together, the command looks like this:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
+<span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">select</span>(Petal.Length, Sepal.Length, Species)
+<span class="co">#&gt; # A tibble: 150 x 3</span>
+<span class="co">#&gt;   Petal.Length Sepal.Length Species</span>
+<span class="co">#&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;  </span>
+<span class="co">#&gt; 1          1.4          5.1 setosa </span>
+<span class="co">#&gt; 2          1.4          4.9 setosa </span>
+<span class="co">#&gt; 3          1.3          4.7 setosa </span>
+<span class="co">#&gt; 4          1.5          4.6 setosa </span>
+<span class="co">#&gt; 5          1.4          5   setosa </span>
+<span class="co">#&gt; 6          1.7          5.4 setosa </span>
+<span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
+<p>The pipe is the glue for putting together multiple data transformations into a sequence. The benefits to using the pipe are that it reduces the amount of code needed to perform a sequence of operations.</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-principles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="joins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="datatransformation.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="selecting.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -207,7 +219,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jeffboichuk/r4ma/edit/master/05-relational.Rmd",
+"link": "https://github.com/jeffboichuk/r4ma/edit/master/04-datatransformation.Rmd",
 "text": "Edit"
 },
 "download": ["r4ma.pdf", "r4ma.epub", "r4ma.mobi"],

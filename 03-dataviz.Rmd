@@ -24,6 +24,7 @@ as the x-axis, y-axis, size, shape or color). Supplying these argument still sto
 short of actually creating a plot
 
 ```{r creating-a-canvas}
+library(tidyverse)
 # ggplot(data=iris, mapping=aes())
 ```
 
@@ -37,7 +38,7 @@ constructing a plot. Every new layer gets added to the canvas via the plus sign
 (`+`). As an example, let's add a set of points to the canvas. You can do this 
 using the `geom_point()` function. 
 
-```{r creating-a-canvas}
+```{r adding-layers}
 # ggplot(data=iris, mapping=aes()) + 
 #   geom_point()
 ```
@@ -105,4 +106,3 @@ typically needing long format? gather?
 extentions?
 We would be remiss not to mention the amazing collection of open source "extensions" 
 that make it easier to produce beautiful plots. These are ggextentions. 
-

@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-principles.html">
-<link rel="next" href="joins.html">
+<link rel="prev" href="mutating.html">
+<link rel="next" href="summarizing.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -165,19 +165,19 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="relational-structures" class="section level2">
-<h2><span class="header-section-number">5.2</span> Relational Structures</h2>
-<p>data integrity, the role of keys, ER diagram</p>
-<p>spread, gather conversation with normalization backdrop</p>
-<p>Excel Conversion IF -&gt; <code>ifelse()</code> VLOOKUP -&gt; <code>left_join()</code></p>
+<div id="grouped-mutates" class="section level2">
+<h2><span class="header-section-number">4.4</span> Grouped Mutates</h2>
+<p>A particularly challenging type of transformation in Excel is creating variables based on a group of records and applying it across all rows for the group. For example, calculating the difference between an individual’s maximum value compared to all other values. This requires finding the maximum for the group, then comparing it with each observation for the group. Typically, you might accomplish this through the creation of a Pivot Table and then using <code>VLOOKUP</code> to reference the maximum per individual. This gets unwieldly (sp) when then data changes. In R you can take the observations in a dataset and put them into groups based on a variable. In the example below, we have simply taken the dataset and modified it to remember that operations should be done in their respective group. Nothing has actually been changed on the data yet, but it is ready for an operation that acts upon the grouped data. The next step is to create that variable we mentioned above that represents the difference between the maximum value for the individual and each of their corresponding observations. In this example, we’ll also create another variable indicating <code>TRUE/FALSE</code> whether the row is the maximum to provide a visual cue and filtering mechanism to throw out those specific observations if desired.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dat %&gt;%</span>
+<span class="co">#   group_by()</span></code></pre></div>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-principles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="joins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="mutating.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="summarizing.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -207,7 +207,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jeffboichuk/r4ma/edit/master/05-relational.Rmd",
+"link": "https://github.com/jeffboichuk/r4ma/edit/master/04-datatransformation.Rmd",
 "text": "Edit"
 },
 "download": ["r4ma.pdf", "r4ma.epub", "r4ma.mobi"],

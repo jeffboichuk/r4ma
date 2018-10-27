@@ -7,7 +7,7 @@ rmd_files: [
   "01-marketing.Rmd",
   "02-tools.Rmd",
   "03-dataviz.Rmd",
-  "04-transformation.Rmd",
+  "04-datatransformation.Rmd",
   "05-relational.Rmd",
   "06-measures.Rmd",
   "07-fieldexp.Rmd",

@@ -24,13 +24,13 @@ description: "This is a minimal example of using the bookdown package to write a
 
 # Welcome {-}
 
-In this book we'll cover how to do quantitative marketing using the R programming language. 
+In this book we'll cover how to perform quantitative marketing using the R programming language. 
 Whether you are a student searching for real world examples of quantitative marketing or 
 you are a seasoned marketing analyst looking for new methods or ideas to implement at 
-one's own company this is the book for you. First, we'll cover how to intelligently 
+your place of work this is the book for you. First, we'll cover how to intelligently 
 approach a problem. Second, we'll go into detail on how to implement a solution using 
 the R programming language. Lastly, we will discuss how to influence marketing decisions 
-via effective communication.
+via effective communication.  
 
 
 

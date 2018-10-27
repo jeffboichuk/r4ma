@@ -32,8 +32,8 @@
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
   
   
-<link rel="prev" href="tidy-principles.html">
-<link rel="next" href="joins.html">
+<link rel="prev" href="adding-layers-of-geoms.html">
+<link rel="next" href="faceting-data-by-group.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -165,19 +165,21 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="relational-structures" class="section level2">
-<h2><span class="header-section-number">5.2</span> Relational Structures</h2>
-<p>data integrity, the role of keys, ER diagram</p>
-<p>spread, gather conversation with normalization backdrop</p>
-<p>Excel Conversion IF -&gt; <code>ifelse()</code> VLOOKUP -&gt; <code>left_join()</code></p>
+<div id="adding-labels-axes-and-legends" class="section level2">
+<h2><span class="header-section-number">3.3</span> Adding Labels, Axes, and Legends</h2>
+<p>With plots it is important to pay attention to the details. These details make an effective plot and just like Microsoft Excel allows you to add and customize each element, so does ggplot. The trick is knowing which functions to use so in this section we will introduce a laundry list of them and then present all of them together to create a single polished plot.</p>
+<p>scale_x_continuous, scale_x_discrete scale_y_continuous, scale_y_continuous</p>
+<p>We highly recommend using the <strong>scales</strong> package when plotting. It comes with a variety of functions to make the scale of axes easier to read.</p>
+<p>labs()</p>
+<p>guide()</p>
 </div>
             </section>
 
           </div>
         </div>
       </div>
-<a href="tidy-principles.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="joins.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="adding-layers-of-geoms.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="faceting-data-by-group.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -207,7 +209,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/jeffboichuk/r4ma/edit/master/05-relational.Rmd",
+"link": "https://github.com/jeffboichuk/r4ma/edit/master/03-dataviz.Rmd",
 "text": "Edit"
 },
 "download": ["r4ma.pdf", "r4ma.epub", "r4ma.mobi"],
