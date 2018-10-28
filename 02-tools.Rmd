@@ -13,7 +13,7 @@ We think of these tools in three different categories:
   1. Business Intelligence (BI) Tools
   2. Visual Analysis Tools
   3. Programming Languages  
-  
+
 Business intelligence (BI) tools are mainly used for summarizing and visualizing 
 data. Some of the most popular tools include: Tableau, Domo, Pentaho, and Looker. 
 The audience for these tools are mainly decision-makers of the data, managers and 
@@ -65,8 +65,8 @@ work due to changes in versions. One reason why R is easier to learn and extend 
 that its development in recent years has been driven by the vision of Hadley Wickham. 
 Hadley is a rockstar in the analytics community for his contributions to advancing 
 the R programming language. He has created and introduced a style of programming and 
-analysis based on "tidy" data principles. INSERT REFERENCE TO TIDY PAPER [@xie2015]. The 
-**tidyverse** [@R-bookdown] is a collection of multiple packages (libraries) designed 
+analysis based on "tidy" data principles in the seminal paper *Tidy Data* [@wickham2014]. 
+The **tidyverse** [@R-tidyverse] is a collection of multiple packages (libraries) designed 
 or influenced by Hadley's approach to analysis. These packages build upon each other 
 so that it is easy to wrangle data into a tidy format and then proceed to analyze it. 
 In order to get started you should install RStudio. This is the preferred application 
@@ -76,6 +76,8 @@ bottom left pane entitled "Console":
 ```{r installing-tidyverse, eval=FALSE}
 install.packages('tidyverse')
 ```
+
+![](images/ch2-installing-tidyverse.png)
 
 Pressing enter will run this command and a long stream of text and red messages 
 will appear in the Console window. This is okay and usually a good thing. It means 
@@ -94,7 +96,7 @@ on the "Packages" tab in the bottom right pane in RStudio. There will be a list
 of every package you have installed, including the Base R packages, with a check 
 mark next to each one that you have loaded in the current session.
 
-[INCLUDE IMAGE OF PACKAGE CHECK MARK]
+![](images/ch2-package-loaded.png)
 
 We have created a companion package with data for this book. You can install and 
 load that package by running the following code: 
@@ -135,8 +137,10 @@ and the result is assigned to an object using `<-`. Throughout the book we will
 introduce more functions with the assumption that you have a basic understanding 
 of how to read the documentation for functions, run them, and assign the result 
 to an object. For a more comprehensive guide to learning the basics of writing R 
-code we recommend ... [WHAT DO WE RECOMMEND?]
+code we recommend *R for Data Science* [@wickham2017] which is the inspiration for 
+this book. In addition, we recommend *The Book of R* [@davies2016], *R in Action* 
+[@kabacoff2015], and *R for Excel Users* [@taveras2016].
 
 **** 
-OTHER IMPORTANT CONSIDERATIONS TO TEACH BEFORE DIVING INTO DATA VIZ?
+OTHER IMPORTANT CONSIDERATIONS TO TEACH BEFORE DIVING INTO DATA VIZ???
 ****

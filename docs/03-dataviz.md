@@ -15,7 +15,10 @@ In contrast, ggplot2 an extensible system of commands that build literally any
 picture you'd like to create. Talented R users have created ggplot masterpieces, 
 such as, the picture of Hadley. 
 
-[ADD HADLEY PICTURE HERE]
+![](images/ch3-hadley-plot.jpg)
+***
+ADD CREDIT TO GARRETT GROLEMUND AND DAVID KAHLE
+***
 
 Every ggplot visualization starts with a canvas. You can create a blank canvas using the 
 function `ggplot()`. This function takes two arguments: 1) `data` and 2) `mapping`. 
@@ -27,8 +30,8 @@ short of actually creating a plot
 
 ```r
 library(tidyverse)
-#library(ourpackage)
-# ggplot(data=iris, mapping=aes())
+#library(completejourney)
+#ggplot(data=iris, mapping=aes())
 ```
 
 ## Adding Layers of Geoms
@@ -57,7 +60,7 @@ Just type `geom_` in your RStudio console window , then press `TAB`. This will
 trigger the tab-completion feature in RStudio and show you the list of geoms that 
 are available for you to use. 
 
-[ADD TAB COMPLETION SCREENSHOT HERE]
+![](images/ch3-geom-tab-completion.png)
 
 ## Adding Labels, Axes, and Legends
 
