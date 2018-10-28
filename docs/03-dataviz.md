@@ -27,14 +27,7 @@ short of actually creating a plot
 
 ```r
 library(tidyverse)
-#> ── Attaching packages ───────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──
-#> ✔ ggplot2 3.0.0     ✔ purrr   0.2.5
-#> ✔ tibble  1.4.2     ✔ dplyr   0.7.7
-#> ✔ tidyr   0.8.1     ✔ stringr 1.3.1
-#> ✔ readr   1.1.1     ✔ forcats 0.3.0
-#> ── Conflicts ──────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
-#> ✖ dplyr::filter() masks stats::filter()
-#> ✖ dplyr::lag()    masks stats::lag()
+#library(ourpackage)
 # ggplot(data=iris, mapping=aes())
 ```
 
@@ -54,14 +47,15 @@ using the `geom_point()` function.
 #   geom_point()
 ```
 
-A "geom" is shorthand for adding a layer to your plot using a specific geometric shape. 
+A "geom" is shorthand for adding a layer to your plot of a specific geometric shape. 
 Geoms are the heart of the plot because they define whether the plot is a line plot, 
-scatterplot, bar plot, etc. In each of these examples, the geom would be `geom_line()`, 
-`geom_point()` or `geom_bar()`. The ggplot tries to makes things intuitive and easy to remember. 
-However, if you need a list of all the geoms you can find them using tab completion 
-in RStudio. Just type `geom_` in your RStudio console window , then press `TAB`. 
-This will trigger the tab-completion feature in RStudio and show you the list of 
-geoms that are available for you to use. 
+scatterplot, or bar plot. In each of these examples, the geom would be `geom_line()`, 
+`geom_point()` or `geom_bar()` and there are many more geom types to consider. The 
+**ggplot2** package tries to makes things intuitive and easy to remember. However, 
+if you need a list of all the geoms you can find them using tab completion in RStudio. 
+Just type `geom_` in your RStudio console window , then press `TAB`. This will 
+trigger the tab-completion feature in RStudio and show you the list of geoms that 
+are available for you to use. 
 
 [ADD TAB COMPLETION SCREENSHOT HERE]
 

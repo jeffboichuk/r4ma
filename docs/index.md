@@ -30,7 +30,7 @@ you are a seasoned marketing analyst looking for new methods or ideas to impleme
 your place of work this is the book for you. First, we'll cover how to intelligently 
 approach a problem. Second, we'll go into detail on how to implement a solution using 
 the R programming language. Lastly, we will discuss how to influence marketing decisions 
-via effective communication.  
+via effective methods and communication.  
 
 
 

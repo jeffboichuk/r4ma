@@ -33,7 +33,7 @@
   
   
 <link rel="prev" href="data.html">
-<link rel="next" href="the-r-programming-language.html">
+<link rel="next" href="getting-started-with-r.html">
 <script src="libs/jquery-2.2.3/jquery.min.js"></script>
 <link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
 <link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools at your Disposal</a><ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
 <li class="chapter" data-level="2.2" data-path="software.html"><a href="software.html"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
-<li class="chapter" data-level="2.3" data-path="the-r-programming-language.html"><a href="the-r-programming-language.html"><i class="fa fa-check"></i><b>2.3</b> The R Programming Language</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2.3</b> Getting Started with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
 <li class="chapter" data-level="3.1" data-path="creating-a-canvas.html"><a href="creating-a-canvas.html"><i class="fa fa-check"></i><b>3.1</b> Creating a Canvas</a></li>
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="summarizing.html"><a href="summarizing.html"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="spread-and-gather.html"><a href="spread-and-gather.html"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
+<li class="chapter" data-level="4.8" data-path="putting-it-all-together.html"><a href="putting-it-all-together.html"><i class="fa fa-check"></i><b>4.8</b> Putting it all together</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="relational.html"><a href="relational.html"><i class="fa fa-check"></i><b>5</b> Relational Data</a><ul>
 <li class="chapter" data-level="5.1" data-path="tidy-principles.html"><a href="tidy-principles.html"><i class="fa fa-check"></i><b>5.1</b> Tidy Principles</a></li>
@@ -167,9 +168,15 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="software" class="section level2">
 <h2><span class="header-section-number">2.2</span> Software</h2>
-<p>Business Intelligence (BI) Tools Tableau, Domo, Pentaho, Looker</p>
-<p>Visual Analysis Tools Excel, SPSS, SAS, Minitab</p>
-<p>Programming Languages Java, Python, Julia, Scala</p>
+<p>There is no shortage of options when choosing software for analysis. A number of open source and proprietary tools have been introduced to make analyzing data easier. We think of these tools in three different categories:</p>
+<ol style="list-style-type: decimal">
+<li>Business Intelligence (BI) Tools</li>
+<li>Visual Analysis Tools</li>
+<li>Programming Languages</li>
+</ol>
+<p>Business intelligence (BI) tools are mainly used for summarizing and visualizing data. Some of the most popular tools include: Tableau, Domo, Pentaho, and Looker. The audience for these tools are mainly decision-makers of the data, managers and executives who need insights quickly. For this reason, these tools usually operate with a fixed set of features on top of a standardized data source. Depending on the tool there may be functionality to clean and curate data, but they main focus is on presenting the insights. These tools are extremely powerful and valuable, but as an analyst you will typically need more control and flexibility when handling data.</p>
+<p>In contrast with BI tools, visual analysis tools are designed with the analyst in mind. They usually have functions to retrieve and transform data as well as visualize and analyze it for insights. Some tools include: Excel, SPSS, RapidMiner, and Minitab. The most ubiquitous is of these tools is Excel. In this book we will draw analogies of how certain operations in Excel translate into R. These tools are great for ad hoc analysis because they are easy to maniupulate and you can literally see the data and how it changes throughout your analysis. This is a huge benefit to analysts because seeing the data makes it easier to spot anomolies and mistakes. Unfortunately, these tools do not make it easy to replicate analyses. Many of these tools are point-and-click systems so that whenever an action needs to be repeated it can take time to re-run and there is a risk of introducing errors.</p>
+<p>Finally, programming languages have more recently become a viable tool for analysis. With the explosion of data programming languages have developed libraries or modules specifically for handling data. They typically abstract some of the underlying code so that the analyst can focus on working with the data instead of fiddling with obtuse bits of code. Some tools include: Java, Python, Julia, Scala, and R. Prior experience with one of these languages is a good reason to begin using it for analysis. These tools have the steepest learning curve, so the more familiar you are with the syntax and structure, the faster you can begin analyzing data. For learners we recommend Python or R given they are at the forefront of data analysis and there are a number courses and online materials devoted to learning them. The tradeoff for being difficult to learn is that writing a script creates an artifact that is stable and lasting. It can be executed on demand and extended to have more functionality over time. Of all the tools mentioned in this section we recommend using a programming language for almost all of your analyses.</p>
 </div>
             </section>
 
@@ -177,7 +184,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
         </div>
       </div>
 <a href="data.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-<a href="the-r-programming-language.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="getting-started-with-r.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

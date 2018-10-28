@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools at your Disposal</a><ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
 <li class="chapter" data-level="2.2" data-path="software.html"><a href="software.html"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
-<li class="chapter" data-level="2.3" data-path="the-r-programming-language.html"><a href="the-r-programming-language.html"><i class="fa fa-check"></i><b>2.3</b> The R Programming Language</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2.3</b> Getting Started with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
 <li class="chapter" data-level="3.1" data-path="creating-a-canvas.html"><a href="creating-a-canvas.html"><i class="fa fa-check"></i><b>3.1</b> Creating a Canvas</a></li>
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="summarizing.html"><a href="summarizing.html"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="spread-and-gather.html"><a href="spread-and-gather.html"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
+<li class="chapter" data-level="4.8" data-path="putting-it-all-together.html"><a href="putting-it-all-together.html"><i class="fa fa-check"></i><b>4.8</b> Putting it all together</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="relational.html"><a href="relational.html"><i class="fa fa-check"></i><b>5</b> Relational Data</a><ul>
 <li class="chapter" data-level="5.1" data-path="tidy-principles.html"><a href="tidy-principles.html"><i class="fa fa-check"></i><b>5.1</b> Tidy Principles</a></li>
@@ -168,8 +169,35 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <div id="mutating" class="section level2">
 <h2><span class="header-section-number">4.3</span> Mutating</h2>
 <p>Mutating a variable means changing a variable in place or creating a new variable. You can think of this as modifying the dataset you provide to the function and the variables of the dataset are the part that is changing or “mutating”. In the following example we’ll show in one step how to change an existing variable and create a new one.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Species =</span> <span class="kw">paste</span>(Species, <span class="st">&quot;flower&quot;</span>), 
+         <span class="dt">above_avg_sep_len =</span> (Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length)))
+<span class="co">#&gt; # A tibble: 150 x 6</span>
+<span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span>
+<span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa…</span>
+<span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa…</span>
+<span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa…</span>
+<span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa…</span>
+<span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa…</span>
+<span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa…</span>
+<span class="co">#&gt; # ... with 144 more rows, and 1 more variable: above_avg_sep_len &lt;lgl&gt;</span></code></pre></div>
 <p>If you are a frequent user of Excel, the <code>mutate()</code> function is how you can implement the logic of an <code>IF</code> statement. In the example below we create a 0/1 indicator variable based on another column.</p>
-<p>In Excel you would implement this as <code>IF(A2=&quot;Yes&quot;, 1, 0)</code>. Another common data transformation exercise is recoding data. Instead of creating a series of nested IFs in Excel or in R, you can leverage the <code>recode()</code> function inside of <code>mutate()</code>. In this example we are changing the survey response choice labels to numbers so that we can calculate summary statistics, like the mean and standard deviation of responses.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">mutate</span>(<span class="dt">Species =</span> <span class="kw">paste</span>(Species, <span class="st">&quot;flower&quot;</span>), 
+         <span class="dt">above_five_sep_len =</span> <span class="kw">ifelse</span>(Sepal.Length <span class="op">&gt;</span><span class="st"> </span><span class="dv">5</span>, <span class="dv">1</span>, <span class="dv">0</span>))
+<span class="co">#&gt; # A tibble: 150 x 6</span>
+<span class="co">#&gt;   Sepal.Length Sepal.Width Petal.Length Petal.Width Species</span>
+<span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt;        &lt;dbl&gt;       &lt;dbl&gt; &lt;chr&gt;  </span>
+<span class="co">#&gt; 1          5.1         3.5          1.4         0.2 setosa…</span>
+<span class="co">#&gt; 2          4.9         3            1.4         0.2 setosa…</span>
+<span class="co">#&gt; 3          4.7         3.2          1.3         0.2 setosa…</span>
+<span class="co">#&gt; 4          4.6         3.1          1.5         0.2 setosa…</span>
+<span class="co">#&gt; 5          5           3.6          1.4         0.2 setosa…</span>
+<span class="co">#&gt; 6          5.4         3.9          1.7         0.4 setosa…</span>
+<span class="co">#&gt; # ... with 144 more rows, and 1 more variable: above_five_sep_len &lt;dbl&gt;</span></code></pre></div>
+<p>In Excel you would implement this as a formula <code>IF(A2 &gt; 5, 1, 0)</code> in Row 2 of a new blank column and drag the formula down.</p>
+<p>Another common data transformation activity is recoding data. Instead of creating a series of nested <code>IF</code> statements in Excel or in R, you can leverage the <code>recode()</code> function inside of <code>mutate()</code>. In this example we are changing the survey response choice labels to numbers so that we can calculate summary statistics, like the mean and standard deviation of responses.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mutate(response = recode(response, </span>
 <span class="co">#                          `Strongly Agree` = 6, </span>
 <span class="co">#                          `Agree` = 5, </span>
@@ -177,10 +205,18 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#                          `Slightly Disagree` = 3,</span>
 <span class="co">#                          `Disagree` = 2,</span>
 <span class="co">#                          `Strongly Disagree` = 1))</span></code></pre></div>
-<p>If you have many questions and would like to them all in one pass, then you can implement it like this… [WHAT IS THE TRICK HERE?]</p>
-<p>VLOOKUP -&gt; <code>left_join()</code></p>
-<p>We will discuss relational data and joins in more detail in Chapter 5</p>
-<p>As a final note on mutating variables, be careful not to use the <code>transmute()</code> function unless you intend to keep only the variables that the function creates, while dropping the rest from your dataset.</p>
+<p>If you have many survey questions on this scale and would like to them all in one pass, then you can implement with the <code>mutate_at()</code> function. It is an extension of the <code>mutate()</code> function that can apply your logic “at” multiple columns.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># mutate_at(c(), funs(recode(., </span>
+<span class="co">#                          `Strongly Agree` = 6, </span>
+<span class="co">#                          `Agree` = 5, </span>
+<span class="co">#                          `Slightly Agree` = 4,</span>
+<span class="co">#                          `Slightly Disagree` = 3,</span>
+<span class="co">#                          `Disagree` = 2,</span>
+<span class="co">#                          `Strongly Disagree` = 1))</span></code></pre></div>
+<hr />
+<p>DECIDE IF WE HAVE AN EXAMPLE AND WANT TO SHOW MUTATE_IF() Aside from the <code>mutate_at()</code> function there is a <code>mutate_if()</code> function that will apply your logic “if” a column meets a certain criteria that you specify. This is a very handy function if, for example, you want to convert multiple columns that are character strings into integers.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mutate_if(is.character, as.numeric)</span></code></pre></div>
+<hr />
 </div>
             </section>
 

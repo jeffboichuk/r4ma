@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools at your Disposal</a><ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
 <li class="chapter" data-level="2.2" data-path="software.html"><a href="software.html"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
-<li class="chapter" data-level="2.3" data-path="the-r-programming-language.html"><a href="the-r-programming-language.html"><i class="fa fa-check"></i><b>2.3</b> The R Programming Language</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2.3</b> Getting Started with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
 <li class="chapter" data-level="3.1" data-path="creating-a-canvas.html"><a href="creating-a-canvas.html"><i class="fa fa-check"></i><b>3.1</b> Creating a Canvas</a></li>
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="summarizing.html"><a href="summarizing.html"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="spread-and-gather.html"><a href="spread-and-gather.html"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
+<li class="chapter" data-level="4.8" data-path="putting-it-all-together.html"><a href="putting-it-all-together.html"><i class="fa fa-check"></i><b>4.8</b> Putting it all together</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="relational.html"><a href="relational.html"><i class="fa fa-check"></i><b>5</b> Relational Data</a><ul>
 <li class="chapter" data-level="5.1" data-path="tidy-principles.html"><a href="tidy-principles.html"><i class="fa fa-check"></i><b>5.1</b> Tidy Principles</a></li>
@@ -170,7 +171,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>Now that you’ve created a blank canvas, you need to add layers to it. In the canvas example above we used the <code>aes()</code> function, which is short for aesthetics. When you define the aesthetics in the top level <code>ggplot()</code> function call, it applies those aesthetics to every layer that subsequently gets applied to the plot. Layers is the core idea of constructing a plot. Every new layer gets added to the canvas via the plus sign (<code>+</code>). As an example, let’s add a set of points to the canvas. You can do this using the <code>geom_point()</code> function.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ggplot(data=iris, mapping=aes()) + </span>
 <span class="co">#   geom_point()</span></code></pre></div>
-<p>A “geom” is shorthand for adding a layer to your plot using a specific geometric shape. Geoms are the heart of the plot because they define whether the plot is a line plot, scatterplot, bar plot, etc. In each of these examples, the geom would be <code>geom_line()</code>, <code>geom_point()</code> or <code>geom_bar()</code>. The ggplot tries to makes things intuitive and easy to remember. However, if you need a list of all the geoms you can find them using tab completion in RStudio. Just type <code>geom_</code> in your RStudio console window , then press <code>TAB</code>. This will trigger the tab-completion feature in RStudio and show you the list of geoms that are available for you to use.</p>
+<p>A “geom” is shorthand for adding a layer to your plot of a specific geometric shape. Geoms are the heart of the plot because they define whether the plot is a line plot, scatterplot, or bar plot. In each of these examples, the geom would be <code>geom_line()</code>, <code>geom_point()</code> or <code>geom_bar()</code> and there are many more geom types to consider. The <strong>ggplot2</strong> package tries to makes things intuitive and easy to remember. However, if you need a list of all the geoms you can find them using tab completion in RStudio. Just type <code>geom_</code> in your RStudio console window , then press <code>TAB</code>. This will trigger the tab-completion feature in RStudio and show you the list of geoms that are available for you to use.</p>
 <p>[ADD TAB COMPLETION SCREENSHOT HERE]</p>
 </div>
             </section>

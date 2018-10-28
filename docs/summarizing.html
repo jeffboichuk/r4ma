@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools at your Disposal</a><ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
 <li class="chapter" data-level="2.2" data-path="software.html"><a href="software.html"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
-<li class="chapter" data-level="2.3" data-path="the-r-programming-language.html"><a href="the-r-programming-language.html"><i class="fa fa-check"></i><b>2.3</b> The R Programming Language</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2.3</b> Getting Started with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
 <li class="chapter" data-level="3.1" data-path="creating-a-canvas.html"><a href="creating-a-canvas.html"><i class="fa fa-check"></i><b>3.1</b> Creating a Canvas</a></li>
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="summarizing.html"><a href="summarizing.html"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="spread-and-gather.html"><a href="spread-and-gather.html"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
+<li class="chapter" data-level="4.8" data-path="putting-it-all-together.html"><a href="putting-it-all-together.html"><i class="fa fa-check"></i><b>4.8</b> Putting it all together</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="relational.html"><a href="relational.html"><i class="fa fa-check"></i><b>5</b> Relational Data</a><ul>
 <li class="chapter" data-level="5.1" data-path="tidy-principles.html"><a href="tidy-principles.html"><i class="fa fa-check"></i><b>5.1</b> Tidy Principles</a></li>
@@ -167,9 +168,45 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="summarizing" class="section level2">
 <h2><span class="header-section-number">4.5</span> Summarizing</h2>
-<p>In the spirit of transforming data we will talk about summarizing it. A summary is just a transformation of underlying source data to a new form. Before summarizing data you must have an idea about HOW to summarize it first. Do you want to count rows, unique instances, calculate the</p>
-<p>COUNTIF/SUMIF/PIVOT -&gt; <code>group_by()</code> + <code>summarize()</code></p>
-<p>In continuing with the references with Excel there is the capability to filter data in your summarizes, just how a Pivot Table allows you to identify variables to filter on. In a general sense, filtering just means that you remove any rows from a dataset that meet a certain criteria.</p>
+<p>In the spirit of transforming data we will talk about summarizing it. A summary is just a transformation of underlying source data to a new form. Before summarizing data you must first have an idea about how to summarize it. Ask yourself: Do I want to count rows? Unique instances? Do I want to calculate the average? Standard deviation? Excel users often summarize using a Pivot Table which has the summarizing functions <code>COUNT</code>, <code>COUNTA</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>MAX</code>, and <code>MIN</code> to name a few. These are very similar to what exists in R and below is a table that translates each of these summary methods to their equivalent counterpart in R.</p>
+<p>[INSERT TABLE HERE]</p>
+<p>Below is an example in R of how to count the number of observations and compute the average.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), <span class="dt">mean=</span><span class="kw">mean</span>(Petal.Length))
+<span class="co">#&gt; # A tibble: 1 x 2</span>
+<span class="co">#&gt;       n  mean</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1   150  3.76</span></code></pre></div>
+<p>If you would like to compute this same summary for different groups of the data then you can just add the <code>group_by()</code> function. As mentioned above, the <code>group_by()</code> function simply prepares the dataset so that it is segmented. Adding the <code>summarize()</code> function after the <code>group_by</code> means that the operations will be run separately across each of the data segments to compute one summary for each.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">group_by</span>(Species) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), <span class="dt">mean=</span><span class="kw">mean</span>(Petal.Length))
+<span class="co">#&gt; # A tibble: 3 x 3</span>
+<span class="co">#&gt;   Species        n  mean</span>
+<span class="co">#&gt;   &lt;fct&gt;      &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1 setosa        50  1.46</span>
+<span class="co">#&gt; 2 versicolor    50  4.26</span>
+<span class="co">#&gt; 3 virginica     50  5.55</span></code></pre></div>
+<p>In Excel, the alternative to using a Pivot Table to summarize data for a group might be to use the <code>COUNTIF</code>, <code>SUMIF</code>, <code>AVERAGEIF</code> functions. These functions perform the same summary methods as mentioned above, but only on rows that meet some criteria. This is better represented in an R pipeline by using the <code>filter()</code> function to only select the observations that meet your criteria and then summarizing. In the example below we remove X observations and then calculate Y.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), <span class="dt">mean=</span><span class="kw">mean</span>(Petal.Length))
+<span class="co">#&gt; # A tibble: 1 x 2</span>
+<span class="co">#&gt;       n  mean</span>
+<span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span>
+<span class="co">#&gt; 1    50  1.46</span></code></pre></div>
+<p>In Excel you would implement this as a formula <code>AVERAGEIF(E2:E150, &quot;setosa&quot;, A2:A150)</code>. To reiterate, in R filtering just means that you remove any rows from a dataset that meet a certain criteria. This is helpful in a pipeline because it will remove the observations while performing that pipeline calculation without removing them from the original dataset you placed at the top of the pipeline. The symbols for doing comparisons, also called “logical operators”, are pretty much the same in Excel as they are in R. One key difference is that if you are checking whether two things are equal to each other in R, then you will need to use double equal signs (<code>A2==B2</code>) rather than the single equals sign that Excel uses <code>A2=B2</code>. Below is a table that shows how these operators are different in R compared to Excel</p>
+<p>[INSERT TABLE HERE]</p>
+<p>In the example below we show multiple of these operators in action to show how they can be used together to select a very small subset of observations from a data set.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>,
+         <span class="op">!</span>(Petal.Length <span class="op">==</span><span class="st"> </span><span class="fl">1.4</span> <span class="op">|</span><span class="st"> </span>Petal.Length <span class="op">==</span><span class="st"> </span><span class="fl">1.5</span>),
+         Petal.Width <span class="op">&lt;</span><span class="st"> </span><span class="fl">0.2</span>) <span class="op">%&gt;%</span>
+<span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>())
+<span class="co">#&gt; # A tibble: 1 x 1</span>
+<span class="co">#&gt;       n</span>
+<span class="co">#&gt;   &lt;int&gt;</span>
+<span class="co">#&gt; 1     1</span></code></pre></div>
 </div>
             </section>
 

@@ -110,7 +110,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="2" data-path="tools.html"><a href="tools.html"><i class="fa fa-check"></i><b>2</b> Tools at your Disposal</a><ul>
 <li class="chapter" data-level="2.1" data-path="data.html"><a href="data.html"><i class="fa fa-check"></i><b>2.1</b> Data</a></li>
 <li class="chapter" data-level="2.2" data-path="software.html"><a href="software.html"><i class="fa fa-check"></i><b>2.2</b> Software</a></li>
-<li class="chapter" data-level="2.3" data-path="the-r-programming-language.html"><a href="the-r-programming-language.html"><i class="fa fa-check"></i><b>2.3</b> The R Programming Language</a></li>
+<li class="chapter" data-level="2.3" data-path="getting-started-with-r.html"><a href="getting-started-with-r.html"><i class="fa fa-check"></i><b>2.3</b> Getting Started with R</a></li>
 </ul></li>
 <li class="chapter" data-level="3" data-path="dataviz.html"><a href="dataviz.html"><i class="fa fa-check"></i><b>3</b> Data Visualizations</a><ul>
 <li class="chapter" data-level="3.1" data-path="creating-a-canvas.html"><a href="creating-a-canvas.html"><i class="fa fa-check"></i><b>3.1</b> Creating a Canvas</a></li>
@@ -128,6 +128,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.5" data-path="summarizing.html"><a href="summarizing.html"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="spread-and-gather.html"><a href="spread-and-gather.html"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
+<li class="chapter" data-level="4.8" data-path="putting-it-all-together.html"><a href="putting-it-all-together.html"><i class="fa fa-check"></i><b>4.8</b> Putting it all together</a></li>
 </ul></li>
 <li class="chapter" data-level="5" data-path="relational.html"><a href="relational.html"><i class="fa fa-check"></i><b>5</b> Relational Data</a><ul>
 <li class="chapter" data-level="5.1" data-path="tidy-principles.html"><a href="tidy-principles.html"><i class="fa fa-check"></i><b>5.1</b> Tidy Principles</a></li>
@@ -167,33 +168,20 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
             <section class="normal" id="section-">
 <div id="selecting" class="section level2">
 <h2><span class="header-section-number">4.2</span> Selecting</h2>
-<p>It is common to have a dataset with more columns than you need or have helper columns that you’ve created but no longer need. In the section above we used the <code>select()</code> function allows you to select only the columns that you want.</p>
+<p>It is common to have a dataset with more columns than you need or have helper columns that you’ve created but no longer need. In the section above we demonstrated how to use the <code>select()</code> function with the pipe operator to pull out only the columns you want to work with. The select function has the nice feature of also being able to rename columns as you select them. For example,</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(Petal.Length, Sepal.Length, Species)
+<span class="st">  </span><span class="kw">select</span>(<span class="dt">petal_length=</span>Petal.Length, <span class="dt">sepal_lenth=</span>Sepal.Length, Species)
 <span class="co">#&gt; # A tibble: 150 x 3</span>
-<span class="co">#&gt;   Petal.Length Sepal.Length Species</span>
-<span class="co">#&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;  </span>
-<span class="co">#&gt; 1          1.4          5.1 setosa </span>
-<span class="co">#&gt; 2          1.4          4.9 setosa </span>
-<span class="co">#&gt; 3          1.3          4.7 setosa </span>
-<span class="co">#&gt; 4          1.5          4.6 setosa </span>
-<span class="co">#&gt; 5          1.4          5   setosa </span>
-<span class="co">#&gt; 6          1.7          5.4 setosa </span>
+<span class="co">#&gt;   petal_length sepal_lenth Species</span>
+<span class="co">#&gt;          &lt;dbl&gt;       &lt;dbl&gt; &lt;fct&gt;  </span>
+<span class="co">#&gt; 1          1.4         5.1 setosa </span>
+<span class="co">#&gt; 2          1.4         4.9 setosa </span>
+<span class="co">#&gt; 3          1.3         4.7 setosa </span>
+<span class="co">#&gt; 4          1.5         4.6 setosa </span>
+<span class="co">#&gt; 5          1.4         5   setosa </span>
+<span class="co">#&gt; 6          1.7         5.4 setosa </span>
 <span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
-<p>The select function has the nice feature of also being able to rename columns as you select them. For example,</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(Petal.Length, Sepal.Length, Species)
-<span class="co">#&gt; # A tibble: 150 x 3</span>
-<span class="co">#&gt;   Petal.Length Sepal.Length Species</span>
-<span class="co">#&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;  </span>
-<span class="co">#&gt; 1          1.4          5.1 setosa </span>
-<span class="co">#&gt; 2          1.4          4.9 setosa </span>
-<span class="co">#&gt; 3          1.3          4.7 setosa </span>
-<span class="co">#&gt; 4          1.5          4.6 setosa </span>
-<span class="co">#&gt; 5          1.4          5   setosa </span>
-<span class="co">#&gt; 6          1.7          5.4 setosa </span>
-<span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
-<p>There is another function in <strong>dplyr</strong> called <code>rename()</code>, however, this can conflict with a function in the <strong>plyr</strong> package also named <code>rename()</code> if you have both packages loaded at the same time. To avoid any confusion, you can reference the function you want using the package name and a double colon before the function like so, <code>dplyr::rename()</code>. This notation specifies the function and where to retrieve its definition, in this case, the <strong>dplyr</strong> package. If you would like to avoid these sorts of package function conflicts, using just the <code>select()</code> function will do everything and a little bit more than using the <code>rename()</code> function. For example, <code>rename()</code> keeps all variables if you just specify one, then it will rename that one variable. The <code>select()</code> function will drop all other variables, but you can work around this by supplying the <code>everything()</code> function into <code>select()</code>. The <code>everything()</code> select helper is not the only one. There are helper functions that match columns by name, numerical range, prefix, suffix and more. In the example below we are renaming the id column, then pulling any of columns with “var” in the name, then everything else.</p>
+<p>There is another function in <strong>dplyr</strong> called <code>rename()</code>, however, this can conflict with a function in the <strong>plyr</strong> package also named <code>rename()</code> if you have both packages loaded at the same time. To avoid confusion about which function to use you can reference the function you want using the package name and a double colon before the function like so, <code>dplyr::rename()</code>. This notation specifies the function and where to retrieve its definition, in this case, the <strong>dplyr</strong> package. If you would like to avoid this package function conflict, using just the <code>select()</code> function will help you accomplish everything and a little bit more than what the <code>rename()</code> function can do. The <code>rename()</code> function keeps all variables if you specify just one, then it will rename that one variable. By default, the <code>select()</code> function drops all other variables not specified, but you can work around this by supplying the <code>everything()</code> function into <code>select()</code>. The <code>everything()</code> select helper is not the only one. There are helper functions that match columns by name, numerical range, prefix, suffix and more. In the example below we are renaming the ID column, then pulling any of columns with “var” in the name, then everything else.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">flower=</span>Species, <span class="kw">contains</span>(<span class="st">&quot;Petal&quot;</span>), <span class="kw">everything</span>())
 <span class="co">#&gt; # A tibble: 150 x 5</span>
@@ -207,6 +195,10 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; 6 setosa          1.7         0.4          5.4         3.9</span>
 <span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
 <p><strong>FIND EXAMPLE THAT MATCHES TEXT ABOVE IT</strong></p>
+<hr />
+<p>SHOULD WE DISCUSS THE VARIANTS OF SELECT?</p>
+<p>The <code>select_helpers</code> make it convenient to specify many variables at once without having to type them all out individually.</p>
+<hr />
 </div>
             </section>
 

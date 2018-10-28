@@ -10,9 +10,9 @@ workflows whenever you receive new data.
 ## Data Pipelines
 
 Before diving into the functions designed to help you transform data, we must cover 
-a perculiar looking operator, the pipe or `%>%`. You will repeatedly see the pipe (`%>%`) 
-used in the code examples for this chapter and in other parts of the book. This 
-operator takes output from the function on its left side and passes it onto the 
+a perculiar looking operator, the pipe or `%>%`. You will repeatedly see the pipe 
+(`%>%`) used in the code examples for this chapter and in other parts of the book. 
+This operator takes output from the function on its left side and passes it onto the 
 function on its right side. As an example we will look at the `select()` function. 
 The first argument in the function is `.data`. Whenever you use the pipe operator 
 it will pass that output into the function's first argument, which in this case, 
@@ -47,58 +47,42 @@ perform a sequence of operations.
 ## Selecting
 
 It is common to have a dataset with more columns than you need or have helper columns 
-that you've created but no longer need. In the section above we used the `select()` 
-function allows you to select only the columns that you want. 
+that you've created but no longer need. In the section above we demonstrated how 
+to use the `select()` function with the pipe operator to pull out only the columns 
+you want to work with. The select function has the nice feature of also being able 
+to rename columns as you select them. For example,
 
 
 ```r
 as_tibble(iris) %>% 
-  select(Petal.Length, Sepal.Length, Species)
+  select(petal_length=Petal.Length, sepal_lenth=Sepal.Length, Species)
 #> # A tibble: 150 x 3
-#>   Petal.Length Sepal.Length Species
-#>          <dbl>        <dbl> <fct>  
-#> 1          1.4          5.1 setosa 
-#> 2          1.4          4.9 setosa 
-#> 3          1.3          4.7 setosa 
-#> 4          1.5          4.6 setosa 
-#> 5          1.4          5   setosa 
-#> 6          1.7          5.4 setosa 
-#> # ... with 144 more rows
-```
-
-The select function has the nice feature of also being able to rename columns as you 
-select them. For example,
-
-
-```r
-as_tibble(iris) %>% 
-  select(Petal.Length, Sepal.Length, Species)
-#> # A tibble: 150 x 3
-#>   Petal.Length Sepal.Length Species
-#>          <dbl>        <dbl> <fct>  
-#> 1          1.4          5.1 setosa 
-#> 2          1.4          4.9 setosa 
-#> 3          1.3          4.7 setosa 
-#> 4          1.5          4.6 setosa 
-#> 5          1.4          5   setosa 
-#> 6          1.7          5.4 setosa 
+#>   petal_length sepal_lenth Species
+#>          <dbl>       <dbl> <fct>  
+#> 1          1.4         5.1 setosa 
+#> 2          1.4         4.9 setosa 
+#> 3          1.3         4.7 setosa 
+#> 4          1.5         4.6 setosa 
+#> 5          1.4         5   setosa 
+#> 6          1.7         5.4 setosa 
 #> # ... with 144 more rows
 ```
 
 There is another function in **dplyr** called `rename()`, however, this can conflict 
 with a function in the **plyr** package also named `rename()` if you have both packages 
-loaded at the same time. To avoid any confusion, you can reference the function you want 
-using the package name and a double colon before the function like so, `dplyr::rename()`. 
-This notation specifies the function and where to retrieve its definition, in this case, 
-the **dplyr** package. If you would like to avoid these sorts of package function conflicts, 
-using just the `select()` function will do everything and a little bit more than using 
-the `rename()` function. For example, `rename()` keeps all variables if you just specify 
-one, then it will rename that one variable. The `select()` function will drop all other 
-variables, but you can work around this by supplying the `everything()` function into 
-`select()`. The `everything()` select helper is not the only one. There are helper 
-functions that match columns by name, numerical range, prefix, suffix and more. In 
-the example below we are renaming the id column, then pulling any of columns with 
-"var" in the name, then everything else.
+loaded at the same time. To avoid confusion about which function to use you can 
+reference the function you want using the package name and a double colon before 
+the function like so, `dplyr::rename()`. This notation specifies the function and 
+where to retrieve its definition, in this case, the **dplyr** package. If you would 
+like to avoid this package function conflict, using just the `select()` function 
+will help you accomplish everything and a little bit more than what the `rename()` 
+function can do. The `rename()` function keeps all variables if you specify just one, 
+then it will rename that one variable. By default, the `select()` function drops 
+all other variables not specified, but you can work around this by supplying the 
+`everything()` function into `select()`. The `everything()` select helper is not 
+the only one. There are helper functions that match columns by name, numerical 
+range, prefix, suffix and more. In the example below we are renaming the ID column, 
+then pulling any of columns with "var" in the name, then everything else.
 
 
 ```r
@@ -117,6 +101,14 @@ as_tibble(iris) %>%
 ```
 **FIND EXAMPLE THAT MATCHES TEXT ABOVE IT**
 
+***
+SHOULD WE DISCUSS THE VARIANTS OF SELECT?
+
+The `select_helpers` make it convenient to specify many variables at once without 
+having to type them all out individually.
+
+***
+
 ## Mutating
 
 Mutating a variable means changing a variable in place or creating a new variable. 
@@ -126,19 +118,51 @@ following example we'll show in one step how to change an existing variable and
 create a new one. 
 
 
+```r
+as_tibble(iris) %>% 
+  mutate(Species = paste(Species, "flower"), 
+         above_avg_sep_len = (Sepal.Length > mean(iris$Sepal.Length)))
+#> # A tibble: 150 x 6
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>          <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#> 1          5.1         3.5          1.4         0.2 setosa…
+#> 2          4.9         3            1.4         0.2 setosa…
+#> 3          4.7         3.2          1.3         0.2 setosa…
+#> 4          4.6         3.1          1.5         0.2 setosa…
+#> 5          5           3.6          1.4         0.2 setosa…
+#> 6          5.4         3.9          1.7         0.4 setosa…
+#> # ... with 144 more rows, and 1 more variable: above_avg_sep_len <lgl>
+```
 
 If you are a frequent user of Excel, the `mutate()` function is how you can implement 
 the logic of an `IF` statement. In the example below we create a 0/1 indicator variable 
 based on another column. 
 
 
+```r
+as_tibble(iris) %>% 
+  mutate(Species = paste(Species, "flower"), 
+         above_five_sep_len = ifelse(Sepal.Length > 5, 1, 0))
+#> # A tibble: 150 x 6
+#>   Sepal.Length Sepal.Width Petal.Length Petal.Width Species
+#>          <dbl>       <dbl>        <dbl>       <dbl> <chr>  
+#> 1          5.1         3.5          1.4         0.2 setosa…
+#> 2          4.9         3            1.4         0.2 setosa…
+#> 3          4.7         3.2          1.3         0.2 setosa…
+#> 4          4.6         3.1          1.5         0.2 setosa…
+#> 5          5           3.6          1.4         0.2 setosa…
+#> 6          5.4         3.9          1.7         0.4 setosa…
+#> # ... with 144 more rows, and 1 more variable: above_five_sep_len <dbl>
+```
 
-In Excel you would implement this as `IF(A2="Yes", 1, 0)`. Another common data 
-transformation exercise is recoding data. Instead of creating a series of nested 
-IFs in Excel or in R, you can leverage the `recode()` function inside of `mutate()`. 
-In this example we are changing the survey response choice labels to numbers so 
-that we can calculate summary statistics, like the mean and standard deviation of 
-responses.
+In Excel you would implement this as a formula `IF(A2 > 5, 1, 0)` in Row 2 of a new 
+blank column and drag the formula down. 
+
+Another common data transformation activity is recoding data. Instead of creating 
+a series of nested `IF` statements in Excel or in R, you can leverage the `recode()` 
+function inside of `mutate()`. In this example we are changing the survey response 
+choice labels to numbers so that we can calculate summary statistics, like the 
+mean and standard deviation of responses.
 
 
 ```r
@@ -151,16 +175,34 @@ responses.
 #                          `Strongly Disagree` = 1))
 ```
 
-If you have many questions and would like to them all in one pass, then you can 
-implement it like this... [WHAT IS THE TRICK HERE?]
+If you have many survey questions on this scale and would like to them all in one 
+pass, then you can implement with the `mutate_at()` function. It is an extension 
+of the `mutate()` function that can apply your logic "at" multiple columns.
 
-VLOOKUP -> `left_join()`
 
-We will discuss relational data and joins in more detail in Chapter 5
+```r
+# mutate_at(c(), funs(recode(., 
+#                          `Strongly Agree` = 6, 
+#                          `Agree` = 5, 
+#                          `Slightly Agree` = 4,
+#                          `Slightly Disagree` = 3,
+#                          `Disagree` = 2,
+#                          `Strongly Disagree` = 1))
+```
 
-As a final note on mutating variables, be careful not to use the `transmute()` 
-function unless you intend to keep only the variables that the function creates, 
-while dropping the rest from your dataset.
+*** 
+DECIDE IF WE HAVE AN EXAMPLE AND WANT TO SHOW MUTATE_IF()
+Aside from the `mutate_at()` function there is a `mutate_if()` function that will 
+apply your logic "if" a column meets a certain criteria that you specify. This is a
+very handy function if, for example, you want to convert multiple columns that 
+are character strings into integers. 
+
+
+```r
+#mutate_if(is.character, as.numeric)
+```
+
+***
 
 ## Grouped Mutates
 
@@ -191,26 +233,120 @@ those specific observations if desired.
 
 In the spirit of transforming data we will talk about summarizing it. A summary 
 is just a transformation of underlying source data to a new form. Before summarizing 
-data you must have an idea about HOW to summarize it first. Do you want to count 
-rows, unique instances, calculate the 
+data you must first have an idea about how to summarize it. Ask yourself: Do I want 
+to count rows? Unique instances? Do I want to calculate the average? Standard deviation? 
+Excel users often summarize using a Pivot Table which has the summarizing functions 
+`COUNT`, `COUNTA`, `AVERAGE`, `STDEV`, `MAX`, and `MIN` to name a few. These are very 
+similar to what exists in R and below is a table that translates each of these summary 
+methods to their equivalent counterpart in R.
 
-COUNTIF/SUMIF/PIVOT -> `group_by()` + `summarize()`
+[INSERT TABLE HERE]
 
-In continuing with the references with Excel there is the capability to filter data 
-in your summarizes, just how a Pivot Table allows you to identify variables to 
-filter on. In a general sense, filtering just means that you remove any rows from a 
-dataset that meet a certain criteria. 
+Below is an example in R of how to count the number of observations and compute 
+the average.
+
+
+```r
+as_tibble(iris) %>%
+  summarise(n = n(), mean=mean(Petal.Length))
+#> # A tibble: 1 x 2
+#>       n  mean
+#>   <int> <dbl>
+#> 1   150  3.76
+```
+
+If you would like to compute this same summary for different groups of the data 
+then you can just add the `group_by()` function. As mentioned above, the `group_by()` 
+function simply prepares the dataset so that it is segmented. Adding the `summarize()` 
+function after the `group_by` means that the operations will be run separately across 
+each of the data segments to compute one summary for each.
+
+
+```r
+as_tibble(iris) %>%
+  group_by(Species) %>%
+  summarise(n = n(), mean=mean(Petal.Length))
+#> # A tibble: 3 x 3
+#>   Species        n  mean
+#>   <fct>      <int> <dbl>
+#> 1 setosa        50  1.46
+#> 2 versicolor    50  4.26
+#> 3 virginica     50  5.55
+```
+
+In Excel, the alternative to using a Pivot Table to summarize data for a group might 
+be to use the `COUNTIF`, `SUMIF`, `AVERAGEIF` functions. These functions perform 
+the same summary methods as mentioned above, but only on rows that meet some 
+criteria. This is better represented in an R pipeline by using the `filter()` 
+function to only select the observations that meet your criteria and then summarizing. 
+In the example below we remove X observations and then calculate Y. 
+
+
+```r
+as_tibble(iris) %>%
+  filter(Species == 'setosa') %>%
+  summarise(n = n(), mean=mean(Petal.Length))
+#> # A tibble: 1 x 2
+#>       n  mean
+#>   <int> <dbl>
+#> 1    50  1.46
+```
+
+In Excel you would implement this as a formula `AVERAGEIF(E2:E150, "setosa", A2:A150)`. 
+To reiterate, in R filtering just means that you remove any rows from a dataset 
+that meet a certain criteria. This is helpful in a pipeline because it will remove 
+the observations while performing that pipeline calculation without removing them 
+from the original dataset you placed at the top of the pipeline. The symbols for 
+doing comparisons, also called "logical operators", are pretty much the same in Excel 
+as they are in R. One key difference is that if you are checking whether two things 
+are equal to each other in R, then you will need to use double equal signs (`A2==B2`) 
+rather than the single equals sign that Excel uses `A2=B2`. Below is a table that 
+shows how these operators are different in R compared to Excel
+
+[INSERT TABLE HERE]
+
+In the example below we show multiple of these operators in action to show how they 
+can be used together to select a very small subset of observations from a data set. 
+
+
+```r
+as_tibble(iris) %>%
+  filter(Species == 'setosa',
+         !(Petal.Length == 1.4 | Petal.Length == 1.5),
+         Petal.Width < 0.2) %>%
+  summarise(n = n())
+#> # A tibble: 1 x 1
+#>       n
+#>   <int>
+#> 1     1
+```
 
 ## Spread and Gather
 
-One particular type of transformation is moving the data between a long format and 
-a wide format. In the long format you have one row per value where the values may 
-be a different group or metric as indicated by another column in the data. For example, 
+One particular type of transformation is moving the data between a "long" format and 
+a "wide" format. In the wide format each metric might be in its own column. If you 
+have 20 metrics then the dataset will have at least 20 columns and it starts to 
+become wider than it is long.
 
+***
+FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS
 [INCLUDE LONG EXAMPLE]
+***
 
-This is the preferred 
+The long format is usually more preferable because functions like `filter()`, 
+`group_by()`, and `summarize()` can operate quickly across rows rather than columns. 
+In addition, the long format is more compatible with the `ggplot()` plotting function 
+to specify multiple series, colors, and facets. 
+
+***
+SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS
+***
 
 ## Functions
 
 In some cases
+
+## Putting it all together
+
+In this section we will show an example that utilizes many of the different methods 
+described in this chapter so that readers can have a complete example
