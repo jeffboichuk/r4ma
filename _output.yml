@@ -1,10 +1,10 @@
 bookdown::gitbook:
   dev: svglite
   css: css/style.css
-  split_by: section
+  split_by: chapter
   config:
     toc:
-      collapse: none
+      collapse: section
       before: |
         <li><a href="./">R for Marketing Analytics</a></li>
       after: |
