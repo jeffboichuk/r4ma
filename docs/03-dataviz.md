@@ -8,24 +8,22 @@ tell your story.
 
 ## Creating a Canvas
 
-The **ggplot2** package is an interesting solution because it does not provide a set of 
-chart types that you can pick and choose. Microsoft Excel has always provided a 
-fixed set of scattercharts, bar charts, and other popular visualizations. 
-In contrast, ggplot2 an extensible system of commands that build literally any 
-picture you'd like to create. Talented R users have created ggplot masterpieces, 
-such as, the picture of Hadley. 
-
-![](images/ch3-hadley-plot.jpg)  
-***
-ADD CREDIT TO GARRETT GROLEMUND AND DAVID KAHLE
-***
-
-Every ggplot visualization starts with a canvas. You can create a blank canvas using the 
-function `ggplot()`. This function takes two arguments: 1) `data` and 2) `mapping`. 
-You can think of the `data` argument as a pallete of information from which to construct 
-the plot and and the `mapping` as the plan for how to structure that information (e.g. 
-as the x-axis, y-axis, size, shape or color). Supplying these argument still stop 
-short of actually creating a plot
+<div style="clear:left;overflow: auto;">
+  <img style="float:right;padding-left:20px;padding-bottom:20px;" src="images/ch3-hadley-plot.jpg" />
+  The **ggplot2** package is an interesting solution because it does not provide a set of 
+  chart types that you can pick and choose. Microsoft Excel has always provided a 
+  fixed set of scattercharts, bar charts, and other popular visualizations. 
+  In contrast, ggplot2 an extensible system of commands that build literally any 
+  picture you'd like to create. Talented R users have created ggplot masterpieces, 
+  such as, Garrett Grolemund and David Kahle's plot of Hadley Wickham. 
+  
+  Every ggplot visualization starts with a canvas. You can create a blank canvas using the 
+  function `ggplot()`. This function takes two arguments: 1) `data` and 2) `mapping`. 
+  You can think of the `data` argument as a pallete of information from which to construct 
+  the plot and and the `mapping` as the plan for how to structure that information (e.g. 
+  as the x-axis, y-axis, size, shape or color). Supplying these argument still stop 
+  short of actually creating a plot
+</div>
 
 
 ```r
@@ -70,15 +68,24 @@ element, so does ggplot. The trick is knowing which functions to use so in this
 section we will introduce a laundry list of them and then present all of them 
 together to create a single polished plot. 
 
-scale_x_continuous, scale_x_discrete
-scale_y_continuous, scale_y_continuous
+
+```r
+#scale_x_continuous, scale_x_discrete
+#scale_y_continuous, scale_y_continuous
+```
 
 We highly recommend using the **scales** package when plotting. It comes with a variety 
 of functions to make the scale of axes easier to read.
 
-labs()
 
-guide()
+```r
+#labs() code here
+```
+
+
+```r
+#guide() code here
+```
 
 ## Faceting Data by Group
 
@@ -89,6 +96,9 @@ example below we have created a histogram for each Species in the iris dataset (
 REPLACE WITH MKTING EXAMPLE**).
 
 
+```r
+#facet_wrap code here
+```
 
 One important aspect to remember when creating facet charts is the scale of the 
 axes. You can accidentally, and purposefully, mislead readers by having the same 

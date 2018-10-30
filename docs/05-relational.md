@@ -102,6 +102,9 @@ dataset provided, keeping all of its rows regardless of whether a matching recor
 is found in the second dataset. 
 
 
+```r
+#left_join code here
+```
 
 All of the columns in the second dataset are now added to the first dataset. In 
 this example, that means only one additional column. The ID column is not duplicated 
@@ -123,6 +126,9 @@ sometimes referred to as a "full join" since it retains the full set of records
 from both datasets.
 
 
+```r
+#outer_join code here
+```
 
 One join function that is unique is the `anti_join()` function. This join returns 
 only the rows that are not matched in the second dataset. This is particularly useful 
@@ -134,3 +140,6 @@ highlights that 95% of records are matched between the two datasets. The remaini
 5% are returned via the `anti_join()` function for us to further inspect.
 
 
+```r
+#inner_join and anti_join code here
+```
