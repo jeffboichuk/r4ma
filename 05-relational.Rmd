@@ -13,11 +13,42 @@ DESCRIBE WHAT IS A TIBBLE VS DATAFRAME?
 
 How to store the data (what is a row and what is a column)
 
-## Relational Structures
+## Relational Data Structures
 
-data integrity, the role of keys, ER diagram
+In programming there is a matra of "Don't repeat yourself" (DRY). It is a principle 
+instilled in software developers because unnecessary repetition makes code less 
+efficient, requires additional time to maintain, and can quickly become out of sync. 
+In code, this means creating functions or classes. In databases,  this is usually done 
+through data normalization. The degree of data normalization is the extent to which 
+the data is replicated in multiple places within a database. Highly normalized means 
+that a single data point only appears in one place. In contrast, a highly denormalized 
+dataset means that a single data point may appear in multiple places. For example, ...
+
+[PROVIDE AN EXAMPLE]
+
+Databases use "keys" in order to keep track of related data points. The word "key" 
+simply refers to values in one or more columns that identify each observation. In 
+the example above we had the column XYZ was the key. In both tables this column 
+existed and referred to the same observation. When working with real-world data 
+it is important to understand how keys are represented in your dataset. There are 
+names for two different types of keys that work together:  
+
+  1. Primary key
+  2. Foreign key
+  
+A primary key is one or more columns in a dataset that are always unique and non-missing 
+for each row. Database architects can put explicit constraints on database tables 
+so that duplicates are never entered into the data, even by mistake. This is a 
+good practice for preserving data integrity. In the example above, the primary key 
+is ... 
+
+A foreign key is 
+
+A discussion of keys is available in Chapter 13 Section 3 of *R for Data Science* [@wickham2017]
+
+ER diagram
  
-revisit spread, gather conversation with normalization backdrop
+Revisit spread, gather conversation with normalization backdrop??
 
 ## Joins
 
