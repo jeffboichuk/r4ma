@@ -32,7 +32,6 @@ approach a problem. Second, we'll go into detail on how to implement a solution 
 the R programming language. Lastly, we will discuss how to influence marketing decisions 
 via effective methods and communication.  
 
-
-
+***
 ![Creative Commons License](images/by-nc-sa.png)  
 This work is licensed under a [Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License](http://creativecommons.org/licenses/by-nc-sa/4.0/). 
