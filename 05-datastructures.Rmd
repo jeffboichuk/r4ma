@@ -1,7 +1,6 @@
-
 # Data Structures {#datastructures}
 
-## Tidy Data
+## Tidy Principles
 
 [INSERT QUIP ABOUT TIDY DATA OR QUOTE]
 
@@ -54,22 +53,15 @@ is ...
 
 A foreign key is just the existence of a primary key in a different table from where 
 it is defined. In the example above column XYZ was the primary key in the first dataset, 
-but it existed in the second dataset for us to join on. In this situation it called the 
-foreign key in the second dataset because it is a key, but it refers to a different dataset 
-where it is a primary key. A great discussion about keys is available in Chapter 13 
-Section 3 of *R for Data Science* [@wickham2017]
+but it existed in the second dataset for us to join on. In this situation it is a foreign 
+key in the second dataset because it is a key, but it refers to a different dataset 
+where it is a primary key.
 
-Below is an entity-relationship diagram (ERD). This visually represents the relationships 
-between a set of tables so that analysts can get a high-level view of what data exists 
-in each dataset and how to bring them together through joins. 
+A discussion of keys is available in Chapter 13 Section 3 of *R for Data Science* [@wickham2017]
 
-[INSERT COMPLETE JOURNEY DIAGRAM]
-
-[INSERT SOME COMMENTARY ABOUT HOW THE COMPLETE JOURNEY DATASET IS ORGANIZED AND WHY]
-
-***
-SHOULD WE REVISIT SPREAD/GATHER UNDER THE BACKDROP OF NORMALIZATION?
-***
+ER diagram
+ 
+Revisit spread, gather conversation with normalization backdrop??
 
 ## Joins
 
@@ -101,7 +93,9 @@ first, then we should use the `left_join()` function. This function takes the fi
 dataset provided, keeping all of its rows regardless of whether a matching record 
 is found in the second dataset. 
 
+```{r left-join}
 
+```
 
 All of the columns in the second dataset are now added to the first dataset. In 
 this example, that means only one additional column. The ID column is not duplicated 
@@ -122,7 +116,9 @@ join key(s) and retains all of the unmatched rows from each dataset. This is als
 sometimes referred to as a "full join" since it retains the full set of records 
 from both datasets.
 
+```{r outer-join}
 
+```
 
 One join function that is unique is the `anti_join()` function. This join returns 
 only the rows that are not matched in the second dataset. This is particularly useful 
@@ -133,4 +129,6 @@ they are not matched and identifed via `anti_join()`. Below is an example which
 highlights that 95% of records are matched between the two datasets. The remaining 
 5% are returned via the `anti_join()` function for us to further inspect.
 
+```{r inner-and-anti-join}
 
+```

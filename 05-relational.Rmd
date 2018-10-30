@@ -1,11 +1,20 @@
-# Relational Data {#relational}
+# Data Structures {#datastructures}
 
-## Tidy Principles
+## Tidy Data
 
 [INSERT QUIP ABOUT TIDY DATA OR QUOTE]
 
 In Chapter 2 when we introduced the R programming language as our preferred tool 
-for marketing analytics we discussed the concept of "tidy" data. 
+for marketing analytics we briefly referenced the concept of "tidy" data. Hadley 
+Wickham proposes three rules that make a dataset tidy:
+
+ 1. Each variable must have its own column.
+ 2. Each observation must have its own row.
+ 3. Each value must have its own cell.
+
+[INSERT FIGURE, POSSIBLY https://r4ds.had.co.nz/tidy-data.html#fig:tidy-structure]
+
+Not all dataset follow these rules, so 
 
 More in depth about tidy principles
 
@@ -13,7 +22,7 @@ DESCRIBE WHAT IS A TIBBLE VS DATAFRAME?
 
 How to store the data (what is a row and what is a column)
 
-## Relational Data Structures
+## Relational Data
 
 In programming there is a matra of "Don't repeat yourself" (DRY). It is a principle 
 instilled in software developers because unnecessary repetition makes code less 
@@ -27,11 +36,11 @@ dataset means that a single data point may appear in multiple places. For exampl
 [PROVIDE AN EXAMPLE]
 
 Databases use "keys" in order to keep track of related data points. The word "key" 
-simply refers to values in one or more columns that identify each observation. In 
-the example above we had the column XYZ was the key. In both tables this column 
-existed and referred to the same observation. When working with real-world data 
-it is important to understand how keys are represented in your dataset. There are 
-names for two different types of keys that work together:  
+simply refers to values in one or more columns that identify each row. In 
+the example above column XYZ was the key. This column exists in both tables and 
+refers to the same row. When working with real-world data it is important to understand 
+how keys are represented in your dataset. There are names for two different types 
+of keys that work together:  
 
   1. Primary key
   2. Foreign key
@@ -42,13 +51,24 @@ so that duplicates are never entered into the data, even by mistake. This is a
 good practice for preserving data integrity. In the example above, the primary key 
 is ... 
 
-A foreign key is 
+A foreign key is just the existence of a primary key in a different table from where 
+it is defined. In the example above column XYZ was the primary key in the first dataset, 
+but it existed in the second dataset for us to join on. In this situation it called the 
+foreign key in the second dataset because it is a key, but it refers to a different dataset 
+where it is a primary key. A great discussion about keys is available in Chapter 13 
+Section 3 of *R for Data Science* [@wickham2017]
 
-A discussion of keys is available in Chapter 13 Section 3 of *R for Data Science* [@wickham2017]
+Below is an entity-relationship diagram (ERD). This visually represents the relationships 
+between a set of tables so that analysts can get a high-level view of what data exists 
+in each dataset and how to bring them together through joins. 
 
-ER diagram
- 
-Revisit spread, gather conversation with normalization backdrop??
+[INSERT COMPLETE JOURNEY DIAGRAM]
+
+[INSERT SOME COMMENTARY ABOUT HOW THE COMPLETE JOURNEY DATASET IS ORGANIZED AND WHY]
+
+***
+SHOULD WE REVISIT SPREAD/GATHER UNDER THE BACKDROP OF NORMALIZATION?
+***
 
 ## Joins
 
