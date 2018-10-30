@@ -15,7 +15,7 @@ In contrast, ggplot2 an extensible system of commands that build literally any
 picture you'd like to create. Talented R users have created ggplot masterpieces, 
 such as, the picture of Hadley. 
 
-![](images/ch3-hadley-plot.jpg)
+![](images/ch3-hadley-plot.jpg)  
 ***
 ADD CREDIT TO GARRETT GROLEMUND AND DAVID KAHLE
 ***

@@ -3,7 +3,20 @@
 
 ## Data
 
-List the types of data. When to use and why.
+ - Free vs. Proprietary
+ - Internal vs. External
+ - Survey Data - the use of one time
+ - Customer Data
+ - Basket/Transaction/Scanner Data
+
+Specifically: 
+ - 84.51
+ - Euromonitor
+ - Delighted (NPS)
+ - comScore
+ - Google Trends
+ 
+Talk about when to use these sources and why we recommend.
 
 ## Software
 
