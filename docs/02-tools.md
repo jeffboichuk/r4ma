@@ -9,7 +9,8 @@
  - Customer Data
  - Basket/Transaction/Scanner Data
 
-Specifically: 
+Specifically:  
+
  - 84.51
  - Euromonitor
  - Delighted (NPS)

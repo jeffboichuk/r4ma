@@ -8,7 +8,7 @@ rmd_files: [
   "02-tools.Rmd",
   "03-dataviz.Rmd",
   "04-datatransformation.Rmd",
-  "05-relational.Rmd",
+  "05-datastructures.Rmd",
   "06-measures.Rmd",
   "07-fieldexp.Rmd",
   "08-mix.Rmd",
