@@ -16,7 +16,7 @@ Also, Steven is committed to helping others develop skills in data science. At
 the University of Virginia (UVA), he created content for a graduate course in 
 Customer Analytics and tutors students needing assistance with statistics-based 
 coursework. Much of Steven’s code is publicly available in his GitHub repositories 
-at https://github.com/StevenMMortimer
+at https://github.com/StevenMMortimer.
 
 Steven holds Bachelor’s and Master’s degrees in Statistics from the University of 
 Virginia and is currently pursing a Master’s of Business Administration at UVA’s 
