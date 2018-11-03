@@ -5,23 +5,25 @@
 
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title></title>
-  <meta name="description" content="">
+  <title>R for Marketing Analytics</title>
+  <meta name="description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook.">
   <meta name="generator" content="bookdown  and GitBook 2.6.7">
 
-  <meta property="og:title" content="" />
+  <meta property="og:title" content="R for Marketing Analytics" />
   <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://jeffboichuk.github.io/r4ma" />
   
-  
-  
-  
+  <meta property="og:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
+  <meta name="github-repo" content="jeffboichuk/r4ma" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="" />
+  <meta name="twitter:title" content="R for Marketing Analytics" />
   
-  
+  <meta name="twitter:description" content="This is a minimal example of using the bookdown package to write a book. The output format for this example is bookdown::gitbook." />
   
 
+<meta name="author" content="Jeffrey Boichuk">
+<meta name="author" content="Steven Mortimer">
 
 
 
@@ -156,7 +158,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"></a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">R for Marketing Analytics</a>
           </h1>
         </div>
 
@@ -175,34 +177,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
 <span class="co">#library(completejourney)</span>
-<span class="co">#ggplot(data=iris, mapping=aes())</span></code></pre></div>
+<span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length))</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/creating-a-canvas-1.svg" width="70%" style="display: block; margin: auto;" /></p>
 </div>
 <div id="adding-layers-of-geoms" class="section level2">
 <h2><span class="header-section-number">3.2</span> Adding Layers of Geoms</h2>
-<p>Now that you’ve created a blank canvas, you need to add layers to it. In the canvas example above we used the <code>aes()</code> function, which is short for aesthetics. When you define the aesthetics in the top level <code>ggplot()</code> function call, it applies those aesthetics to every layer that subsequently gets applied to the plot. Layers is the core idea of constructing a plot. Every new layer gets added to the canvas via the plus sign (<code>+</code>). As an example, let’s add a set of points to the canvas. You can do this using the <code>geom_point()</code> function.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># ggplot(data=iris, mapping=aes()) + </span>
-<span class="co">#   geom_point()</span></code></pre></div>
-<p>A “geom” is shorthand for adding a layer to your plot of a specific geometric shape. Geoms are the heart of the plot because they define whether the plot is a line plot, scatterplot, or bar plot. In each of these examples, the geom would be <code>geom_line()</code>, <code>geom_point()</code> or <code>geom_bar()</code> and there are many more geom types to consider. The <strong>ggplot2</strong> package tries to makes things intuitive and easy to remember. However, if you need a list of all the geoms you can find them using tab completion in RStudio. Just type <code>geom_</code> in your RStudio console window , then press <code>TAB</code>. This will trigger the tab-completion feature in RStudio and show you the list of geoms that are available for you to use.</p>
+<p>Now that you’ve created a blank canvas, you need to add layers to it. In the canvas example above we used the <code>aes()</code> function, which is short for aesthetics. When you define the aesthetics in the top level <code>ggplot()</code> function call, it applies those aesthetics to every layer that subsequently gets applied to the plot. Layering is the core idea of constructing a plot. Every new layer gets added to the canvas via the plus sign (<code>+</code>). As an example, let’s add a set of points to the canvas. You can do this using the <code>geom_point()</code> function.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>()</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/adding-layers-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>In the code above the <code>ggplot()</code> function creates a canvas with the direction to register the <code>iris</code> dataset for potential plotting values and to orient the axes so that the x-axis represents the <code>Sepal.Length</code> variable and the y-axis represents the <code>Petal.Length</code>. This is quite a bit of direction, but the <code>ggplot()</code> function is just creating this canvas. Given all that upfront direction you can add the <code>geom_point()</code> function with no arguments. The function can already infer that you would like points from the <code>iris</code> dataset based on the <code>Sepal.Length</code> and the <code>Petal.Length</code>. The alternative is to specify that aesthetic mapping within the <code>geom_point()</code> function like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>iris) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_point</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length))</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/adding-layers-2-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>This block of code creates the same exact plot as the first, but in this example is much more obvious that you would like to arrange the points with the x and y-axes as specified. Before talking more about the syntax of the <strong>ggplot2</strong> package, it is important to clarify that a “geom” is shorthand for adding a layer to your plot of a specific geometric shape. Geoms are the heart of the plot because they define whether the plot is a line plot, scatterplot, or bar plot. In each of these examples, the geom would be <code>geom_line()</code>, <code>geom_point()</code> or <code>geom_bar()</code> and there are many more geom types to consider. The <strong>ggplot2</strong> package tries to makes things intuitive and easy to remember. However, if you need a list of all the geoms you can find them using tab completion in RStudio. Just type <code>geom_</code> in your RStudio “Console” window, then press <code>TAB</code>. This will trigger the tab-completion feature in RStudio and show you the list of geoms that are available for you to use.</p>
 <div class="figure">
 <img src="images/ch3-geom-tab-completion.png" />
 
 </div>
+<p>Typically, a plot only contains one type of geom. For example, a plot using <code>geom_bar()</code> creates a bar plot, but the layering principle makes it simple to a compound plot with more than one geom so that you can have, for example, bars and a line in the same plot.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># CREATE A COMPOUND PLOT WITH A BAR AND A LINE ACROSS</span></code></pre></div>
 </div>
 <div id="adding-labels-axes-and-legends" class="section level2">
 <h2><span class="header-section-number">3.3</span> Adding Labels, Axes, and Legends</h2>
-<p>With plots it is important to pay attention to the details. These details make an effective plot and just like Microsoft Excel allows you to add and customize each element, so does ggplot. The trick is knowing which functions to use so in this section we will introduce a laundry list of them and then present all of them together to create a single polished plot.</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#scale_x_continuous, scale_x_discrete</span>
-<span class="co">#scale_y_continuous, scale_y_continuous</span></code></pre></div>
-<p>We highly recommend using the <strong>scales</strong> package when plotting. It comes with a variety of functions to make the scale of axes easier to read.</p>
+<p>With plots it is important to pay attention to the details. These details make an effective plot and just like Microsoft Excel allows you to add and customize each element, so does ggplot. The trick is knowing which functions to use so in this section we will introduce lists of the most common and then present all of them together to demonstrate how to create a single polished plot.</p>
+<p>First, when creating axes you will reference them using one of the functions starting with “<code>scale_</code>”. You must know the datatype being represented on the axis in order to pick the right function. For example, if you are plotting integers or numeric values on the x-axis then use the function <code>scale_x_continuous()</code>. If you are plotting characters or factors, then use <code>scale_x_discrete()</code> and if you are plotting a date or datetime, then use <code>scale_x_date()</code>. Specifying these functions will allow you to pass in explicit breaks, axis labels formatting, and more. In the example below we have forced the scale from 0 to 8 to with break at every 2 units and showing one decimal place.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># COME UP WITH A BETTER EXAMPLE THAN WHAT IS DESCRIBED ABOVE!</span></code></pre></div>
+<p>We highly recommend using the <strong>scales</strong> package when plotting. It comes with a variety of functions to make the scale of axes easier to read. For example, if you would like to display the axes with percent signs and have there be 5 break points, then you can specify like so:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># scales::percent, breaks=pretty_breaks(5)</span></code></pre></div>
+<p>After configuring the axes, you should label them along with titling the plot. The <code>labs()</code> function accepts the arguments <code>title</code>, <code>subtitle</code>, <code>caption</code>, <code>x</code>, <code>y</code>, <code>fill</code>, <code>color</code>, and more. The purpose of the <code>labs()</code> function is to be a generic function that allows you to provide labels for most all parts of the plot from the aesthetics, to axes, or the overall plot itself.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#labs() code here</span></code></pre></div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#guide() code here</span></code></pre></div>
 </div>
 <div id="faceting-data-by-group" class="section level2">
 <h2><span class="header-section-number">3.4</span> Faceting Data by Group</h2>
-<p>A common research question is comparing a response across groups. The best way to visualize these relationships is to use the <code>facet_grid()</code> function. A facet creates a panel of plots with one for each value in the grouping variable. In the example below we have created a histogram for each Species in the iris dataset (<strong>NOTE: REPLACE WITH MKTING EXAMPLE</strong>).</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#facet_wrap code here</span></code></pre></div>
-<p>One important aspect to remember when creating facet charts is the scale of the axes. You can accidentally, and purposefully, mislead readers by having the same metric plotted on two different axis scales. <strong>IS THIS THE default behavior for the <code>facet_grid()</code></strong></p>
-<p>The syntax for facetting data has changed over time, from formula notation to a newer style. You may see examples online that use this older notation like so <code>facet_grid(.~var)</code>. This is equivalent to <code>facet_grid(cols=vars(var))</code>.</p>
+<p>A common research question is comparing a data across groups. The best way to visualize these relationships is to use the <code>facet_wrap()</code> function. A facet creates a panel of plots with one for each value in the grouping variable. In the example below we have created a <code>Petal.Length</code> histogram for each <code>Species</code> in the iris dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#REPLACE WITH A MARKETING DATA EXAMPLE</span>
+<span class="kw">ggplot</span>(<span class="dt">data=</span>iris) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_histogram</span>(<span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span>Species, <span class="dt">ncol=</span><span class="dv">1</span>, <span class="dt">scales=</span><span class="st">&quot;fixed&quot;</span>)
+<span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
+<p><img src="03-dataviz_files/figure-html/facet-wrap-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>This shows, very distincting, how the distribution of <code>Petal.Length</code> differs for each of the species. One important aspect to remember when creating facet charts is the scale of the axes. You can accidentally, and purposefully, mislead readers by having the same metric plotted on two different axis scales. The default argument is <code>scales=&quot;fixed&quot;</code> meaning that the x and y-axes are the same for every panel. You can change that so each panel has a different scale for either axis or both.</p>
+<p>Note that the syntax for facetting plots has changed over time, from formula notation to a newer style. There is even a new function called <code>facet_grid()</code> which has the same behavior. You may see examples online that use this older notation like so <code>facet_wrap(.~var)</code>, but this is equivalent to <code>facet_grid(cols=vars(var))</code>.</p>
 </div>
 <div id="chart-types" class="section level2">
 <h2><span class="header-section-number">3.5</span> Chart Types</h2>
@@ -210,8 +226,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="advanced-plotting" class="section level2">
 <h2><span class="header-section-number">3.6</span> Advanced Plotting</h2>
-<p>theme_blank() ggthemes annotating? typically needing long format? gather?</p>
-<p>extentions? We would be remiss not to mention the amazing collection of open source “extensions” that make it easier to produce beautiful plots. These are ggextentions.</p>
+<p>THEMES - theme_blank(), ggthemes ANNOTATION - annotating a plot with a line or text DATA FORMAT??? - typically needing long format? gather?</p>
+<p>PLOTTING EXTENSIONS - We would be remiss not to mention the amazing collection of open source “extensions” that make it easier to produce beautiful plots. These are ggextentions.</p>
 
 </div>
 </div>

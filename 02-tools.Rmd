@@ -1,7 +1,7 @@
 # Tools at your Disposal {#tools}
 
 ***
-CHAPTER OVERVIEW
+CHAPTER OVERVIEW NEEDED
 
 ***
 
@@ -199,6 +199,6 @@ this book. In addition, we recommend *The Book of R* [@davies2016], *R in Action
 [@kabacoff2015], and *R for Excel Users* [@taveras2016].
 
 **** 
-OTHER IMPORTANT CONSIDERATIONS TO TEACH BEFORE DIVING INTO DATA VIZ???
+OTHER IMPORTANT CONSIDERATIONS TO TEACH BEFORE DIVING INTO DATA VIZ???  
 
 ****

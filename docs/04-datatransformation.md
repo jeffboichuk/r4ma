@@ -104,7 +104,7 @@ as_tibble(iris) %>%
 ***
 SHOULD WE DISCUSS THE VARIANTS OF SELECT?
 The `select_helpers` make it convenient to specify many variables at once without 
-having to type them all out individually.
+having to type them all out individually.  
 
 ***
 
@@ -190,7 +190,7 @@ of the `mutate()` function that can apply your logic "at" multiple columns.
 ```
 
 *** 
-DECIDE IF WE HAVE AN EXAMPLE AND WANT TO SHOW MUTATE_IF()
+DECIDE IF WE HAVE AN EXAMPLE AND WANT TO SHOW MUTATE_IF()  
 
 ***
 
@@ -332,7 +332,7 @@ become wider than it is long.
 
 ***
 FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS
-[INCLUDE LONG EXAMPLE]
+[INCLUDE LONG EXAMPLE]  
 
 ***
 
@@ -342,7 +342,7 @@ In addition, the long format is more compatible with the `ggplot()` plotting fun
 to specify multiple series, colors, and facets. 
 
 ***
-SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS
+SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS  
 
 ***
 

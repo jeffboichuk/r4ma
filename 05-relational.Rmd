@@ -66,10 +66,10 @@ in each dataset and how to bring them together through joins.
 
 [INSERT SOME COMMENTARY ABOUT HOW THE COMPLETE JOURNEY DATASET IS ORGANIZED AND WHY]
 
-***
-SHOULD WE REVISIT SPREAD/GATHER UNDER THE BACKDROP OF NORMALIZATION?
+****
+SHOULD WE REVISIT SPREAD/GATHER UNDER THE BACKDROP OF NORMALIZATION?   
 
-***
+****
 
 ## Joins
 
@@ -113,10 +113,10 @@ in R perform exactly as their counterparts in SQL. For readers with knowledge of
 Excel this is akin to using the `VLOOKUP` function or a combination of `INDEX-MATCH` 
 to pull records from another dataset.
 
-***
-SHOULD WE EXPLICITLY SHOW THE TRANSLATION FROM VLOOKUP TO LEFT_JOIN()? OR INDEX-MATCH?
+****
+SHOULD WE EXPLICITLY SHOW THE TRANSLATION FROM VLOOKUP TO LEFT_JOIN()? OR INDEX-MATCH?  
 
-***
+****
 
 As depicted in the joins reference diagram there are different join types for 
 returning records from both datasets, all from one dataset, or only the overalapping 

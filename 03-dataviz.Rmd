@@ -27,79 +27,130 @@ tell your story.
 ```{r creating-a-canvas}
 library(tidyverse)
 #library(completejourney)
-#ggplot(data=iris, mapping=aes())
+ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length))
 ```
 
 ## Adding Layers of Geoms
 
-Now that you've created a blank canvas, you need to add layers to it. In the canvas example 
-above we used the `aes()` function, which is short for aesthetics. When you define the 
-aesthetics in the top level `ggplot()` function call, it applies those aesthetics to 
-every layer that subsequently gets applied to the plot. Layers is the core idea of 
-constructing a plot. Every new layer gets added to the canvas via the plus sign 
-(`+`). As an example, let's add a set of points to the canvas. You can do this 
-using the `geom_point()` function. 
+Now that you've created a blank canvas, you need to add layers to it. In the canvas 
+example above we used the `aes()` function, which is short for aesthetics. When 
+you define the aesthetics in the top level `ggplot()` function call, it applies 
+those aesthetics to every layer that subsequently gets applied to the plot. Layering 
+is the core idea of constructing a plot. Every new layer gets added to the canvas 
+via the plus sign (`+`). As an example, let's add a set of points to the canvas. 
+You can do this using the `geom_point()` function. 
 
 ```{r adding-layers}
-# ggplot(data=iris, mapping=aes()) + 
-#   geom_point()
+ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) +
+  geom_point()
 ```
 
-A "geom" is shorthand for adding a layer to your plot of a specific geometric shape. 
-Geoms are the heart of the plot because they define whether the plot is a line plot, 
-scatterplot, or bar plot. In each of these examples, the geom would be `geom_line()`, 
-`geom_point()` or `geom_bar()` and there are many more geom types to consider. The 
-**ggplot2** package tries to makes things intuitive and easy to remember. However, 
-if you need a list of all the geoms you can find them using tab completion in RStudio. 
-Just type `geom_` in your RStudio console window , then press `TAB`. This will 
-trigger the tab-completion feature in RStudio and show you the list of geoms that 
-are available for you to use. 
+In the code above the `ggplot()` function creates a canvas with the direction to 
+register the `iris` dataset for potential plotting values and to orient the axes 
+so that the x-axis represents the `Sepal.Length` variable and the y-axis represents 
+the `Petal.Length`. This is quite a bit of direction, but the `ggplot()` function 
+is just creating this canvas. Given all that upfront direction you can add the 
+`geom_point()` function with no arguments. The function can already infer that 
+you would like points from the `iris` dataset based on the `Sepal.Length` and the 
+`Petal.Length`. The alternative is to specify that aesthetic mapping within the 
+`geom_point()` function like so: 
+
+```{r adding-layers-2}
+ggplot(data=iris) +
+  geom_point(mapping=aes(x=Sepal.Length, y=Petal.Length))
+```
+
+This block of code creates the same exact plot as the first, but in this example 
+is much more obvious that you would like to arrange the points with the x and y-axes 
+as specified. Before talking more about the syntax of the **ggplot2** package, 
+it is important to clarify that a "geom" is shorthand for adding a layer to your 
+plot of a specific geometric shape. Geoms are the heart of the plot because they 
+define whether the plot is a line plot, scatterplot, or bar plot. In each of these 
+examples, the geom would be `geom_line()`, `geom_point()` or `geom_bar()` and there 
+are many more geom types to consider. The **ggplot2** package tries to makes things 
+intuitive and easy to remember. However, if you need a list of all the geoms you can 
+find them using tab completion in RStudio. Just type `geom_` in your RStudio "Console"
+window, then press `TAB`. This will trigger the tab-completion feature in RStudio 
+and show you the list of geoms that are available for you to use. 
 
 ![](images/ch3-geom-tab-completion.png)
+
+Typically, a plot only contains one type of geom. For example, a plot using `geom_bar()` 
+creates a bar plot, but the layering principle makes it simple to a compound plot 
+with more than one geom so that you can have, for example, bars and a line in the 
+same plot.
+
+```{r adding-layers-3}
+# CREATE A COMPOUND PLOT WITH A BAR AND A LINE ACROSS
+```
 
 ## Adding Labels, Axes, and Legends
 
 With plots it is important to pay attention to the details. These details make an 
 effective plot and just like Microsoft Excel allows you to add and customize each 
 element, so does ggplot. The trick is knowing which functions to use so in this 
-section we will introduce a laundry list of them and then present all of them 
-together to create a single polished plot. 
+section we will introduce lists of the most common and then present all of them 
+together to demonstrate how to create a single polished plot. 
 
-```{r scales}
-#scale_x_continuous, scale_x_discrete
-#scale_y_continuous, scale_y_continuous
+First, when creating axes you will reference them using one of the functions 
+starting with "`scale_`". You must know the datatype being represented on the axis 
+in order to pick the right function. For example, if you are plotting integers or 
+numeric values on the x-axis then use the function `scale_x_continuous()`. If you 
+are plotting characters or factors, then use `scale_x_discrete()` and if you are 
+plotting a date or datetime, then use `scale_x_date()`. Specifying these functions 
+will allow you to pass in explicit breaks, axis labels formatting, and more. In the 
+example below we have forced the scale from 0 to 8 to with break at every 2 units
+and showing one decimal place.
+
+```{r scales-config}
+# COME UP WITH A BETTER EXAMPLE THAN WHAT IS DESCRIBED ABOVE!
 ```
 
 We highly recommend using the **scales** package when plotting. It comes with a variety 
-of functions to make the scale of axes easier to read.
+of functions to make the scale of axes easier to read. For example, if you would like 
+to display the axes with percent signs and have there be 5 break points, then you 
+can specify like so: 
+
+```{r scales-config-2}
+# scales::percent, breaks=pretty_breaks(5)
+```
+
+After configuring the axes, you should label them along with titling the plot. The 
+`labs()` function accepts the arguments `title`, `subtitle`, `caption`, `x`, `y`, 
+`fill`, `color`, and more. The purpose of the `labs()` function is to be a generic 
+function that allows you to provide labels for most all parts of the plot from the 
+aesthetics, to axes, or the overall plot itself.
 
 ```{r labs}
 #labs() code here
 ```
 
-```{r guide}
-#guide() code here
-```
-
 ## Faceting Data by Group
 
-A common research question is comparing a response across groups. The best way to 
-visualize these relationships is to use the `facet_grid()` function. A facet 
+A common research question is comparing a data across groups. The best way to 
+visualize these relationships is to use the `facet_wrap()` function. A facet 
 creates a panel of plots with one for each value in the grouping variable. In the 
-example below we have created a histogram for each Species in the iris dataset (**NOTE: 
-REPLACE WITH MKTING EXAMPLE**).
+example below we have created a `Petal.Length` histogram for each `Species` in the 
+iris dataset.
 
 ```{r facet-wrap}
-#facet_wrap code here
+#REPLACE WITH A MARKETING DATA EXAMPLE
+ggplot(data=iris) + 
+  geom_histogram(mapping=aes(x=Petal.Length)) + 
+  facet_wrap(.~Species, ncol=1, scales="fixed")
 ```
 
-One important aspect to remember when creating facet charts is the scale of the 
-axes. You can accidentally, and purposefully, mislead readers by having the same 
-metric plotted on two different axis scales. **IS THIS THE default behavior for the 
-`facet_grid()`**
+This shows, very distincting, how the distribution of `Petal.Length` differs for 
+each of the species. One important aspect to remember when creating facet charts 
+is the scale of the axes. You can accidentally, and purposefully, mislead readers 
+by having the same metric plotted on two different axis scales. The default argument 
+is `scales="fixed"` meaning that the x and y-axes are the same for every panel. You 
+can change that so each panel has a different scale for either axis or both.
 
-The syntax for facetting data has changed over time, from formula notation to a newer 
-style. You may see examples online that use this older notation like so `facet_grid(.~var)`. This is equivalent to `facet_grid(cols=vars(var))`.
+Note that the syntax for facetting plots has changed over time, from formula notation 
+to a newer style. There is even a new function called `facet_grid()` which has the 
+same behavior. You may see examples online that use this older notation like so 
+`facet_wrap(.~var)`, but this is equivalent to `facet_grid(cols=vars(var))`.
 
 ## Chart Types
 
@@ -108,11 +159,10 @@ pie chart? a critique on pie charts
 
 ## Advanced Plotting
 
-theme_blank()
-ggthemes
-annotating?
-typically needing long format? gather?
+THEMES - theme_blank(), ggthemes
+ANNOTATION - annotating a plot with a line or text
+DATA FORMAT??? - typically needing long format? gather?
 
-extentions?
+PLOTTING EXTENSIONS - 
 We would be remiss not to mention the amazing collection of open source "extensions" 
 that make it easier to produce beautiful plots. These are ggextentions. 
