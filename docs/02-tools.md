@@ -1,23 +1,66 @@
 
 # Tools at your Disposal {#tools}
 
+***
+CHAPTER OVERVIEW
+
+***
+
 ## Data
 
- - Free vs. Proprietary
- - Internal vs. External
+It may seem obvious that having data is a requirement for doing marketing analytics, 
+but the interesting point is that you may have access to more data than you first 
+realize. There are so many sources of data that are being actively tagged, passively 
+logged, freely offered up by customers, and sold by vendors. In this section we will 
+cover sources to consider for your own projects and the datasets that we'll further 
+introduce throughout the book. 
+
+When thinking about data it is helpful to put some structure around your brainstorm 
+of potential sources. At a very high level, you have two sources of data: "Internal" 
+data that is created or controlled by you or your organization or "External" data 
+that is captured outside your organization. For example, "Internal" data might be 
+the tracking of web tags on your website, customer transaction data, or recent survey 
+data. It is possible that your organization purchased proprietary data from a vendor 
+and controls that dataset in-house. The best way to access your "Internal" data is 
+to start talking with the teams that collect and manage it. These could be front-line 
+staff or employees in your IT department. If your organization has a customer service 
+department and they log information into Salesforce, ZenDesk, or other tracking software 
+then you have likely found a rich source of data. 
+
+***
+[INSERT A DIAGRAM HERE WITH SAMPLE LISTS]
  - Survey Data - the use of one time
  - Customer Data
  - Basket/Transaction/Scanner Data
+ 
+ ***
 
-Specifically:  
+When thinking about "External" data your mind may immediately jump to vendors selling 
+access to data. These are great resources, but the world around you is full of data. 
+Social media data is one that is ubiquitous. The movement for open data in government 
+and the sciences has unlocked and shared a massive amount of data. More broadly, this 
+type of information is available via a file download or an API. An API typically refers 
+to a series of URLs that share data via the web. Organizations make these URL endpoints 
+available publically or through a provisioned key to users who are interested. Scraping 
+data from the web is an option, but we recommend first checking the terms of the website, 
+looking for the site's `robots.txt` file, and seeing if programmatic access via API 
+already exists.
 
- - 84.51
+In this book we will be using a number of external data sources in hopes that you 
+will gain experience with them and be able to access them for your future projects. 
+The organization 84.51&deg; has a laser focus on using data science to analyze 
+patterns in customer data to drive better outcomes. They generously share a few 
+datasets, namely, a dataset called the *Complete Journey* which contains a representative 
+set of transactions at Kroger grocery stores for 2,500 households. This data is does 
+not contain real transactions, but is a perfect dataset for us to highlight and hone 
+skills in analyzing transaction data. Euromonitor...
+
+Continue talking about when to use these sources and why we recommend.
+
  - Euromonitor
  - Delighted (NPS)
  - comScore
  - Google Trends
- 
-Talk about when to use these sources and why we recommend.
 
 ## Software
 
@@ -161,4 +204,5 @@ this book. In addition, we recommend *The Book of R* [@davies2016], *R in Action
 
 **** 
 OTHER IMPORTANT CONSIDERATIONS TO TEACH BEFORE DIVING INTO DATA VIZ???
+
 ****

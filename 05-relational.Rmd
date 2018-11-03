@@ -68,6 +68,7 @@ in each dataset and how to bring them together through joins.
 
 ***
 SHOULD WE REVISIT SPREAD/GATHER UNDER THE BACKDROP OF NORMALIZATION?
+
 ***
 
 ## Joins
@@ -114,6 +115,7 @@ to pull records from another dataset.
 
 ***
 SHOULD WE EXPLICITLY SHOW THE TRANSLATION FROM VLOOKUP TO LEFT_JOIN()? OR INDEX-MATCH?
+
 ***
 
 As depicted in the joins reference diagram there are different join types for 

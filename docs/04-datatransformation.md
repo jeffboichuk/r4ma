@@ -103,7 +103,6 @@ as_tibble(iris) %>%
 
 ***
 SHOULD WE DISCUSS THE VARIANTS OF SELECT?
-
 The `select_helpers` make it convenient to specify many variables at once without 
 having to type them all out individually.
 
@@ -192,6 +191,9 @@ of the `mutate()` function that can apply your logic "at" multiple columns.
 
 *** 
 DECIDE IF WE HAVE AN EXAMPLE AND WANT TO SHOW MUTATE_IF()
+
+***
+
 Aside from the `mutate_at()` function there is a `mutate_if()` function that will 
 apply your logic "if" a column meets a certain criteria that you specify. This is a
 very handy function if, for example, you want to convert multiple columns that 
@@ -331,6 +333,7 @@ become wider than it is long.
 ***
 FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS
 [INCLUDE LONG EXAMPLE]
+
 ***
 
 The long format is usually more preferable because functions like `filter()`, 
@@ -340,6 +343,7 @@ to specify multiple series, colors, and facets.
 
 ***
 SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS
+
 ***
 
 ## Functions
