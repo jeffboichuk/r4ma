@@ -217,17 +217,53 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="st">  </span><span class="kw">facet_wrap</span>(.<span class="op">~</span>Species, <span class="dt">ncol=</span><span class="dv">1</span>, <span class="dt">scales=</span><span class="st">&quot;fixed&quot;</span>)
 <span class="co">#&gt; `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span></code></pre></div>
 <p><img src="03-dataviz_files/figure-html/facet-wrap-1.svg" width="70%" style="display: block; margin: auto;" /></p>
-<p>This shows, very distincting, how the distribution of <code>Petal.Length</code> differs for each of the species. One important aspect to remember when creating facet charts is the scale of the axes. You can accidentally, and purposefully, mislead readers by having the same metric plotted on two different axis scales. The default argument is <code>scales=&quot;fixed&quot;</code> meaning that the x and y-axes are the same for every panel. You can change that so each panel has a different scale for either axis or both.</p>
+<p>This shows, very distinctly, how the distribution of <code>Petal.Length</code> differs for each of the species. One important aspect to remember when creating facet charts is the scale of the axes in each panel. You can accidentally, and purposefully, mislead readers by having the same metric plotted on two different axis scales. The default argument is <code>scales=&quot;fixed&quot;</code> meaning that the x and y-axes are the same for every panel. You can change that so each panel has a different scale for either axis or both.</p>
 <p>Note that the syntax for facetting plots has changed over time, from formula notation to a newer style. There is even a new function called <code>facet_grid()</code> which has the same behavior. You may see examples online that use this older notation like so <code>facet_wrap(.~var)</code>, but this is equivalent to <code>facet_grid(cols=vars(var))</code>.</p>
 </div>
 <div id="chart-types" class="section level2">
 <h2><span class="header-section-number">3.5</span> Chart Types</h2>
-<p>Marketing Specific Charts? pie chart? a critique on pie charts</p>
+<hr />
+<p>WHAT SORT OF CHARTS SHOULD BE HIGHLIGHTED HERE????<br />
+Marketing Specific Charts?<br />
+Pie chart? a critique on pie charts</p>
+<hr />
 </div>
 <div id="advanced-plotting" class="section level2">
 <h2><span class="header-section-number">3.6</span> Advanced Plotting</h2>
-<p>THEMES - theme_blank(), ggthemes ANNOTATION - annotating a plot with a line or text DATA FORMAT??? - typically needing long format? gather?</p>
-<p>PLOTTING EXTENSIONS - We would be remiss not to mention the amazing collection of open source “extensions” that make it easier to produce beautiful plots. These are ggextentions.</p>
+<p>The <strong>ggplot2</strong> package provides access to the general look and feel of the plot via a “theme”. You may notice in that most plots have a grey background with minor and major axis lines. This is because the default theme is <code>theme_gray()</code>. You can have complete control over every aspect of the plot’s look by using the <code>theme()</code> function; however, there are a number of pre-configured themes to choose from. A good example is the <code>theme_bw()</code> function. Adding this at the end of any plot will make the background white.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gridExtra)
+<span class="co">#&gt; </span>
+<span class="co">#&gt; Attaching package: &#39;gridExtra&#39;</span>
+<span class="co">#&gt; The following object is masked from &#39;package:dplyr&#39;:</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt;     combine</span>
+plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+plot2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()
+<span class="kw">grid.arrange</span>(plot1, plot2, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/theme-blank-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>A complete list of default <strong>ggplot2</strong> themes is available in the documentation at <a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="uri">https://ggplot2.tidyverse.org/reference/ggtheme.html</a>. These are just the options that come with the <strong>ggplot2* package, but there are over 20 themes available via the </strong>ggthemes** package. This includes styling that match some of the most prolific writers of data journalism including, The Economist, Five Thirty Eight, The Wall Street Journal and more. Despite the overwhelming number of options, we recommend using <code>theme_bw()</code> for the best formatting using only the <strong>ggplot2</strong> package.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(ggthemes)
+plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
+plot2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_wsj</span>()
+<span class="kw">grid.arrange</span>(plot1, plot2, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/theme-wsj-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>Even with the right plot type, readers might need an extra callout or highlight to the core insight. In keeping with the idea of layers, you can annotate a plot with a line, text, or other shape just by adding it as another layer. For example, there are geoms available for you to add a horizontal line (<code>geom_hline()</code>) or vertical line (<code>geom_vline()</code>). The <code>annotate()</code> function makes it easy to add text or shapes.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">geom_hline</span>(<span class="dt">yintercept=</span><span class="kw">mean</span>(iris<span class="op">$</span>Petal.Length), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span>
+<span class="st">  </span><span class="kw">geom_vline</span>(<span class="dt">xintercept=</span><span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length), <span class="dt">color=</span><span class="st">&quot;red&quot;</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom=</span><span class="st">&quot;text&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Avg Petal.Length&quot;</span>, 
+           <span class="dt">x=</span><span class="kw">min</span>(iris<span class="op">$</span>Sepal.Length) <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span>, 
+           <span class="dt">y=</span><span class="kw">mean</span>(iris<span class="op">$</span>Petal.Length) <span class="op">+</span><span class="st"> </span><span class="fl">0.25</span>) <span class="op">+</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">annotate</span>(<span class="dt">geom=</span><span class="st">&quot;text&quot;</span>, <span class="dt">label=</span><span class="st">&quot;Avg Sepal.Length&quot;</span>, 
+           <span class="dt">x=</span><span class="kw">mean</span>(iris<span class="op">$</span>Sepal.Length) <span class="op">+</span><span class="st"> </span><span class="fl">0.4</span>, 
+           <span class="dt">y=</span><span class="kw">max</span>(iris<span class="op">$</span>Petal.Length) <span class="op">-</span><span class="st"> </span><span class="fl">0.1</span>)</code></pre></div>
+<p><img src="03-dataviz_files/figure-html/annotate-1.svg" width="70%" style="display: block; margin: auto;" /></p>
+<p>We would be remiss not to mention the amazing collection of open source “extensions” that make it easier to produce beautiful plots. There are dozens of packages registered as extenders of the <strong>ggplot2</strong> package. These packages make it easy for users to create complex plots. For example, the <strong>gganimate</strong> package makes it possible to animate plots typically to exhibit trends as they evolve over time. The package <strong>ggrepel</strong> uses a dynamic algorithm to label all points in a scatterplot without having overlapping labels. It is truly amazing work that is being done by researchers and analysts who contribute their work back to the R user community. {This type of collaboration is why using an open-source software can be a good decision.} say this??</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># EXAMPLE OF A USEFUL EXTENSION, POSSIBLY MARKETING RELATED?</span></code></pre></div>
+<hr />
+<p>SHOULD WE TALK ABOUT DATA FORMAT (I.E. LONG VS WIDE)??? - gather?</p>
+<hr />
 
 </div>
 </div>

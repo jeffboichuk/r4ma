@@ -158,12 +158,13 @@ ggplot(data=iris) +
 
 <img src="03-dataviz_files/figure-html/facet-wrap-1.svg" width="70%" style="display: block; margin: auto;" />
 
-This shows, very distincting, how the distribution of `Petal.Length` differs for 
+This shows, very distinctly, how the distribution of `Petal.Length` differs for 
 each of the species. One important aspect to remember when creating facet charts 
-is the scale of the axes. You can accidentally, and purposefully, mislead readers 
-by having the same metric plotted on two different axis scales. The default argument 
-is `scales="fixed"` meaning that the x and y-axes are the same for every panel. You 
-can change that so each panel has a different scale for either axis or both.
+is the scale of the axes in each panel. You can accidentally, and purposefully, 
+mislead readers by having the same metric plotted on two different axis scales. 
+The default argument is `scales="fixed"` meaning that the x and y-axes are the 
+same for every panel. You can change that so each panel has a different scale for 
+either axis or both.
 
 Note that the syntax for facetting plots has changed over time, from formula notation 
 to a newer style. There is even a new function called `facet_grid()` which has the 
@@ -172,15 +173,95 @@ same behavior. You may see examples online that use this older notation like so
 
 ## Chart Types
 
-Marketing Specific Charts?
-pie chart? a critique on pie charts
+*****
+WHAT SORT OF CHARTS SHOULD BE HIGHLIGHTED HERE????  
+Marketing Specific Charts?  
+Pie chart? a critique on pie charts  
+
+*****
 
 ## Advanced Plotting
 
-THEMES - theme_blank(), ggthemes
-ANNOTATION - annotating a plot with a line or text
-DATA FORMAT??? - typically needing long format? gather?
+The **ggplot2** package provides access to the general look and feel of the plot 
+via a "theme". You may notice in that most plots have a grey background with minor 
+and major axis lines. This is because the default theme is `theme_gray()`. You can 
+have complete control over every aspect of the plot's look by using the `theme()` 
+function; however, there are a number of pre-configured themes to choose from. A 
+good example is the `theme_bw()` function. Adding this at the end of any plot will 
+make the background white. 
 
-PLOTTING EXTENSIONS - 
+
+```r
+library(gridExtra)
+#> 
+#> Attaching package: 'gridExtra'
+#> The following object is masked from 'package:dplyr':
+#> 
+#>     combine
+plot1 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
+plot2 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point() + theme_bw()
+grid.arrange(plot1, plot2, ncol=2)
+```
+
+<img src="03-dataviz_files/figure-html/theme-blank-1.svg" width="70%" style="display: block; margin: auto;" />
+
+A complete list of default **ggplot2** themes is available in the documentation at 
+https://ggplot2.tidyverse.org/reference/ggtheme.html. These are just the options 
+that come with the **ggplot2* package, but there are over 20 themes available via 
+the **ggthemes** package. This includes styling that match some of the most prolific 
+writers of data journalism including, The Economist, Five Thirty Eight, The Wall 
+Street Journal and more. Despite the overwhelming number of options, we recommend 
+using `theme_bw()` for the best formatting using only the **ggplot2** package. 
+
+
+```r
+library(ggthemes)
+plot1 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
+plot2 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point() + theme_wsj()
+grid.arrange(plot1, plot2, ncol=2)
+```
+
+<img src="03-dataviz_files/figure-html/theme-wsj-1.svg" width="70%" style="display: block; margin: auto;" />
+
+Even with the right plot type, readers might need an extra callout or highlight to 
+the core insight. In keeping with the idea of layers, you can annotate a plot with 
+a line, text, or other shape just by adding it as another layer. For example, there 
+are geoms available for you to add a horizontal line (`geom_hline()`) or vertical 
+line (`geom_vline()`). The `annotate()` function makes it easy to add text or shapes.
+
+
+```r
+ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + 
+  geom_point() + 
+  geom_hline(yintercept=mean(iris$Petal.Length), color="red") +
+  geom_vline(xintercept=mean(iris$Sepal.Length), color="red") + 
+  annotate(geom="text", label="Avg Petal.Length", 
+           x=min(iris$Sepal.Length) + 0.25, 
+           y=mean(iris$Petal.Length) + 0.25) + 
+  annotate(geom="text", label="Avg Sepal.Length", 
+           x=mean(iris$Sepal.Length) + 0.4, 
+           y=max(iris$Petal.Length) - 0.1)
+```
+
+<img src="03-dataviz_files/figure-html/annotate-1.svg" width="70%" style="display: block; margin: auto;" />
+
 We would be remiss not to mention the amazing collection of open source "extensions" 
-that make it easier to produce beautiful plots. These are ggextentions. 
+that make it easier to produce beautiful plots. There are dozens of packages registered 
+as extenders of the **ggplot2** package. These packages make it easy for users to 
+create complex plots. For example, the **gganimate** package makes it possible to 
+animate plots typically to exhibit trends as they evolve over time. The package 
+**ggrepel** uses a dynamic algorithm to label all points in a scatterplot without 
+having overlapping labels. It is truly amazing work that is being done by researchers 
+and analysts who contribute their work back to the R user community. {This type of 
+collaboration is why using an open-source software can be a good decision.} say this??
+
+
+```r
+# EXAMPLE OF A USEFUL EXTENSION, POSSIBLY MARKETING RELATED?
+```
+
+
+*****
+SHOULD WE TALK ABOUT DATA FORMAT (I.E. LONG VS WIDE)??? - gather?  
+
+*****
