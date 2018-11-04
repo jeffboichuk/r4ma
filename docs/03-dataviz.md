@@ -193,11 +193,6 @@ make the background white.
 
 ```r
 library(gridExtra)
-#> 
-#> Attaching package: 'gridExtra'
-#> The following object is masked from 'package:dplyr':
-#> 
-#>     combine
 plot1 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
 plot2 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point() + theme_bw()
 grid.arrange(plot1, plot2, ncol=2)

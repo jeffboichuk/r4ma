@@ -172,7 +172,7 @@ function; however, there are a number of pre-configured themes to choose from. A
 good example is the `theme_bw()` function. Adding this at the end of any plot will 
 make the background white. 
 
-```{r theme-blank, fig.height=4, fig.width=8}
+```{r theme-blank, fig.height=4, fig.width=10}
 library(gridExtra)
 plot1 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
 plot2 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point() + theme_bw()
@@ -187,7 +187,7 @@ writers of data journalism including, The Economist, Five Thirty Eight, The Wall
 Street Journal and more. Despite the overwhelming number of options, we recommend 
 using `theme_bw()` for the best formatting using only the **ggplot2** package. 
 
-```{r theme-wsj, fig.height=4, fig.width=8}
+```{r theme-wsj, fig.height=4, fig.width=10}
 library(ggthemes)
 plot1 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point()
 plot2 <- ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length)) + geom_point() + theme_wsj()

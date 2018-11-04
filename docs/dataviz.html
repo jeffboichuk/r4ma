@@ -232,11 +232,6 @@ Pie chart? a critique on pie charts</p>
 <h2><span class="header-section-number">3.6</span> Advanced Plotting</h2>
 <p>The <strong>ggplot2</strong> package provides access to the general look and feel of the plot via a “theme”. You may notice in that most plots have a grey background with minor and major axis lines. This is because the default theme is <code>theme_gray()</code>. You can have complete control over every aspect of the plot’s look by using the <code>theme()</code> function; however, there are a number of pre-configured themes to choose from. A good example is the <code>theme_bw()</code> function. Adding this at the end of any plot will make the background white.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(gridExtra)
-<span class="co">#&gt; </span>
-<span class="co">#&gt; Attaching package: &#39;gridExtra&#39;</span>
-<span class="co">#&gt; The following object is masked from &#39;package:dplyr&#39;:</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt;     combine</span>
 plot1 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>()
 plot2 &lt;-<span class="st"> </span><span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length)) <span class="op">+</span><span class="st"> </span><span class="kw">geom_point</span>() <span class="op">+</span><span class="st"> </span><span class="kw">theme_bw</span>()
 <span class="kw">grid.arrange</span>(plot1, plot2, <span class="dt">ncol=</span><span class="dv">2</span>)</code></pre></div>
