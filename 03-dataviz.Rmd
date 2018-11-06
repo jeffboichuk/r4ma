@@ -5,6 +5,10 @@ can be said about good data visualizations. In this chapter we will show you how
 to use the R package **ggplot2** to visualize different types of marketing data to 
 tell your story.
 
+```{r include=FALSE}
+library(tidyverse)
+```
+
 ## Creating a Canvas
 
 <div style="clear:left;overflow: auto;">
@@ -25,7 +29,6 @@ tell your story.
 </div>
 
 ```{r creating-a-canvas}
-library(tidyverse)
 #library(completejourney)
 ggplot(data=iris, mapping=aes(x=Sepal.Length, y=Petal.Length))
 ```

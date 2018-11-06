@@ -1,10 +1,10 @@
 # Preparing and Transforming Data {#datatransformation}
 
 It is a common adage that data analysts spend 80% of their time cleaning data and 
-only 20% on value-add analysis. In this chapter we will show the basics of transforming 
-data with the tidyverse package **dplyr**. Using these functions are the best way to 
-reduce the overall amount of time spent on data cleaning and to create reproducible 
-workflows whenever you receive new data.
+only 20% on value-add analysis (Dasu and Johnson 2003). In this chapter we will show 
+the basics of transforming data with the tidyverse package **dplyr**. Using these 
+functions are the best way to reduce the overall amount of time spent on data cleaning 
+and to create reproducible workflows whenever you receive new data.
 
 ```{r include=FALSE}
 library(tidyverse)

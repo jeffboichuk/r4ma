@@ -175,8 +175,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p><img style="float:right;padding-left:20px;padding-bottom:20px;" src="images/ch3-hadley-plot.jpg" /> The <strong>ggplot2</strong> package is an interesting solution because it does not provide a set of chart types that you can pick and choose. Microsoft Excel has always provided a fixed set of scattercharts, bar charts, and other popular visualizations. In contrast, ggplot2 an extensible system of commands that build literally any picture you’d like to create. Talented R users have created ggplot masterpieces, such as, Garrett Grolemund and David Kahle’s plot of Hadley Wickham.</p>
 <p>Every ggplot visualization starts with a canvas. You can create a blank canvas using the function <code>ggplot()</code>. This function takes two arguments: 1) <code>data</code> and 2) <code>mapping</code>. You can think of the <code>data</code> argument as a pallete of information from which to construct the plot and and the <code>mapping</code> as the plan for how to structure that information (e.g. as the x-axis, y-axis, size, shape or color). Supplying these argument still stop short of actually creating a plot</p>
 </div>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="co">#library(completejourney)</span>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#library(completejourney)</span>
 <span class="kw">ggplot</span>(<span class="dt">data=</span>iris, <span class="dt">mapping=</span><span class="kw">aes</span>(<span class="dt">x=</span>Sepal.Length, <span class="dt">y=</span>Petal.Length))</code></pre></div>
 <p><img src="03-dataviz_files/figure-html/creating-a-canvas-1.svg" width="70%" style="display: block; margin: auto;" /></p>
 </div>

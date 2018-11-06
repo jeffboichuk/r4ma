@@ -1,12 +1,19 @@
 # Data Structures {#datastructures}
 
+***
+CHAPTER OVERVIEW NEEDED??
+
+***
+
 ## Tidy Data
 
 [INSERT QUIP ABOUT TIDY DATA OR QUOTE]
 
 In Chapter 2 when we introduced the R programming language as our preferred tool 
-for marketing analytics we briefly referenced the concept of "tidy" data. Hadley 
-Wickham proposes three rules that make a dataset tidy:
+for marketing analytics we briefly referenced the concept of "tidy" data. It is 
+important to understand tidy data principles because they are the motivation for 
+many packages that make data processing a less tedious exercise. Hadley Wickham 
+proposes three rules that make a dataset tidy:
 
  1. Each variable must have its own column.
  2. Each observation must have its own row.
@@ -14,13 +21,18 @@ Wickham proposes three rules that make a dataset tidy:
 
 [INSERT FIGURE, POSSIBLY https://r4ds.had.co.nz/tidy-data.html#fig:tidy-structure]
 
-Not all dataset follow these rules, so 
+Wickham has even reimagined the `data.frame` object type that exists in base R with 
+a version that is more "tidy". It is a `tbl_df` object, also referred to as a "tibble". 
+For example, tibbles do not add rownames because rownames are values that should be 
+stored in their own column. Tibbles are more convenient than data.frames for other 
+reasons, which is also why we recommend using them.
 
-More in depth about tidy principles
+Not all datasets are tidy,
 
-DESCRIBE WHAT IS A TIBBLE VS DATAFRAME?
+****
+EUROMONITOR EXAMPLE???
 
-How to store the data (what is a row and what is a column)
+****
 
 ## Relational Data
 
@@ -33,7 +45,10 @@ the data is replicated in multiple places within a database. Highly normalized m
 that a single data point only appears in one place. In contrast, a highly denormalized 
 dataset means that a single data point may appear in multiple places. For example, ...
 
-[PROVIDE AN EXAMPLE]
+****
+COMPLETEJOURNEY AS AN EXAMPLE???
+
+****
 
 Databases use "keys" in order to keep track of related data points. The word "key" 
 simply refers to values in one or more columns that identify each row. In 
@@ -85,7 +100,10 @@ You will notice that depending on the type of join certain records will be retai
 For example, the `inner_join()` function will only retain records if they both exist 
 in the dataset. 
 
-[INSERT IMAGE HERE]
+****
+[INSERT IMAGE HERE] SOMETHING LIKE https://r4ds.had.co.nz/diagrams/join-venn.png  
+
+****
 
 You will also notice in the join reference above how the observations are matched. 
 Typically, you will choose one column and whereever there is a match between the 
