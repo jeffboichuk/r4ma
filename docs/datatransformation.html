@@ -124,7 +124,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <li class="chapter" data-level="4.1" data-path="datatransformation.html"><a href="datatransformation.html#data-pipelines"><i class="fa fa-check"></i><b>4.1</b> Data Pipelines</a></li>
 <li class="chapter" data-level="4.2" data-path="datatransformation.html"><a href="datatransformation.html#selecting"><i class="fa fa-check"></i><b>4.2</b> Selecting</a></li>
 <li class="chapter" data-level="4.3" data-path="datatransformation.html"><a href="datatransformation.html#mutating"><i class="fa fa-check"></i><b>4.3</b> Mutating</a></li>
-<li class="chapter" data-level="4.4" data-path="datatransformation.html"><a href="datatransformation.html#grouped-mutates"><i class="fa fa-check"></i><b>4.4</b> Grouped Mutates</a></li>
+<li class="chapter" data-level="4.4" data-path="datatransformation.html"><a href="datatransformation.html#mutating-within-groups"><i class="fa fa-check"></i><b>4.4</b> Mutating within Groups</a></li>
 <li class="chapter" data-level="4.5" data-path="datatransformation.html"><a href="datatransformation.html#summarizing"><i class="fa fa-check"></i><b>4.5</b> Summarizing</a></li>
 <li class="chapter" data-level="4.6" data-path="datatransformation.html"><a href="datatransformation.html#spread-and-gather"><i class="fa fa-check"></i><b>4.6</b> Spread and Gather</a></li>
 <li class="chapter" data-level="4.7" data-path="datatransformation.html"><a href="datatransformation.html#functions"><i class="fa fa-check"></i><b>4.7</b> Functions</a></li>
@@ -171,10 +171,8 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <p>It is a common adage that data analysts spend 80% of their time cleaning data and only 20% on value-add analysis. In this chapter we will show the basics of transforming data with the tidyverse package <strong>dplyr</strong>. Using these functions are the best way to reduce the overall amount of time spent on data cleaning and to create reproducible workflows whenever you receive new data.</p>
 <div id="data-pipelines" class="section level2">
 <h2><span class="header-section-number">4.1</span> Data Pipelines</h2>
-<p>Before diving into the functions designed to help you transform data, we must cover a perculiar looking operator, the pipe or <code>%&gt;%</code>. You will repeatedly see the pipe (<code>%&gt;%</code>) used in the code examples for this chapter and in other parts of the book. This operator takes output from the function on its left side and passes it onto the function on its right side. As an example we will look at the <code>select()</code> function. The first argument in the function is <code>.data</code>. Whenever you use the pipe operator it will pass that output into the function’s first argument, which in this case, is a <code>tbl_df</code>. This means that we must put a <code>tbl_df</code> object (a dataset) on the left side of the pipe operator and then the <code>select()</code> function on the right. The first argument is assumed to be the data, so the remaining argument inside the function, according to the documentation, should be one or more unquoted variable names or numbers representing the position of columns. If we put this together, the command looks like this:</p>
-<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)
-<span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
-<span class="st">  </span><span class="kw">select</span>(Petal.Length, Sepal.Length, Species)
+<p>Before diving into the functions designed to help you transform data, we must introduce a perculiar looking operator, the pipe or <code>%&gt;%</code>. You will repeatedly see the pipe (<code>%&gt;%</code>) used in the code examples for this chapter and in other parts of the book. This operator takes output from the function on its left side and passes it onto the function on its right side. As an example we will look at the <code>select()</code> function. The first argument in the <code>select()</code> function is <code>.data</code>. Whenever you use the pipe operator it will pass that output into the function’s first argument, which in this case, is a <code>tbl_df</code>. This means that we must put a <code>tbl_df</code> object (a dataset) on the left side of the pipe operator and then the <code>select()</code> function on the right.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">select</span>(Petal.Length, Sepal.Length, Species)
 <span class="co">#&gt; # A tibble: 150 x 3</span>
 <span class="co">#&gt;   Petal.Length Sepal.Length Species</span>
 <span class="co">#&gt;          &lt;dbl&gt;        &lt;dbl&gt; &lt;fct&gt;  </span>
@@ -185,11 +183,12 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; 5          1.4          5   setosa </span>
 <span class="co">#&gt; 6          1.7          5.4 setosa </span>
 <span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
-<p>The pipe is the glue for putting together multiple data transformations into a sequence. The benefits to using the pipe are that it reduces the amount of code needed to perform a sequence of operations.</p>
+<p>The first argument is assumed to be the data, so the remaining argument inside the function, according to the documentation, should be one or more unquoted variable names or numbers representing the position of columns.</p>
+<p>The pipe is the glue for putting together multiple data transformations into a sequence. The benefits to using the pipe are that it reduces the amount of code needed to perform a sequence of operations and it is easy to read the flow of operations.</p>
 </div>
 <div id="selecting" class="section level2">
 <h2><span class="header-section-number">4.2</span> Selecting</h2>
-<p>It is common to have a dataset with more columns than you need or have helper columns that you’ve created but no longer need. In the section above we demonstrated how to use the <code>select()</code> function with the pipe operator to pull out only the columns you want to work with. The select function has the nice feature of also being able to rename columns as you select them. For example,</p>
+<p>It is common to have a dataset with more columns than you need or have helper columns that you would like to remove. In the section above we demonstrated how to use the <code>select()</code> function with the pipe operator to pull out only the columns you want to work with. The <code>select()</code> function has the nice feature of also being able to rename columns as you select them. In the example below we select out three columns while renaming two of them.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">petal_length=</span>Petal.Length, <span class="dt">sepal_lenth=</span>Sepal.Length, Species)
 <span class="co">#&gt; # A tibble: 150 x 3</span>
@@ -202,7 +201,7 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; 5          1.4         5   setosa </span>
 <span class="co">#&gt; 6          1.7         5.4 setosa </span>
 <span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
-<p>There is another function in <strong>dplyr</strong> called <code>rename()</code>, however, this can conflict with a function in the <strong>plyr</strong> package also named <code>rename()</code> if you have both packages loaded at the same time. To avoid confusion about which function to use you can reference the function you want using the package name and a double colon before the function like so, <code>dplyr::rename()</code>. This notation specifies the function and where to retrieve its definition, in this case, the <strong>dplyr</strong> package. If you would like to avoid this package function conflict, using just the <code>select()</code> function will help you accomplish everything and a little bit more than what the <code>rename()</code> function can do. The <code>rename()</code> function keeps all variables if you specify just one, then it will rename that one variable. By default, the <code>select()</code> function drops all other variables not specified, but you can work around this by supplying the <code>everything()</code> function into <code>select()</code>. The <code>everything()</code> select helper is not the only one. There are helper functions that match columns by name, numerical range, prefix, suffix and more. In the example below we are renaming the ID column, then pulling any of columns with “var” in the name, then everything else.</p>
+<p>Note that there is another function in <strong>dplyr</strong> called <code>rename()</code>; however, this can conflict with a function in the <strong>plyr</strong> package also named <code>rename()</code> if you have both packages loaded at the same time. To avoid confusion about which function to use you can reference the function you want using the package name and a double colon before the function like so, <code>dplyr::rename()</code>. This notation specifies the function and where to retrieve its definition, in this case, the <strong>dplyr</strong> package. If you would like to avoid this package function conflict, using just the <code>select()</code> function will help you accomplish everything and a little bit more than what the <code>rename()</code> function can do. The <code>rename()</code> function keeps all variables if you specify just one, then it will rename that one variable. By default, the <code>select()</code> function drops all other variables not specified, but you can work around this by supplying the <code>everything()</code> function into <code>select()</code>. The <code>everything()</code> select helper is not the only one. There are helper functions that match columns by name, numerical range, prefix, suffix and more. In the example below we are renaming the ID column, then pulling any of columns with “var” in the name, then everything else.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
 <span class="st">  </span><span class="kw">select</span>(<span class="dt">flower=</span>Species, <span class="kw">contains</span>(<span class="st">&quot;Petal&quot;</span>), <span class="kw">everything</span>())
 <span class="co">#&gt; # A tibble: 150 x 5</span>
@@ -216,9 +215,48 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt; 6 setosa          1.7         0.4          5.4         3.9</span>
 <span class="co">#&gt; # ... with 144 more rows</span></code></pre></div>
 <p><strong>FIND EXAMPLE THAT MATCHES TEXT ABOVE IT</strong></p>
-<hr />
-<p>SHOULD WE DISCUSS THE VARIANTS OF SELECT? The <code>select_helpers</code> make it convenient to specify many variables at once without having to type them all out individually.</p>
-<hr />
+<table>
+<thead>
+<tr class="header">
+<th>Function</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>starts_with()</code></td>
+<td>Starts with a prefix.</td>
+</tr>
+<tr class="even">
+<td><code>ends_with()</code></td>
+<td>Ends with a suffix.</td>
+</tr>
+<tr class="odd">
+<td><code>contains()</code></td>
+<td>Contains a literal string.</td>
+</tr>
+<tr class="even">
+<td><code>matches()</code></td>
+<td>Matches a regular expression.</td>
+</tr>
+<tr class="odd">
+<td><code>num_range()</code></td>
+<td>Matches a numerical range like x01, x02, x03.</td>
+</tr>
+<tr class="even">
+<td><code>one_of()</code></td>
+<td>Matches variable names in a character vector.</td>
+</tr>
+<tr class="odd">
+<td><code>everything()</code></td>
+<td>Matches all variables.</td>
+</tr>
+<tr class="even">
+<td><code>last_col()</code></td>
+<td>Select last variable, possibly with an offset.</td>
+</tr>
+</tbody>
+</table>
 </div>
 <div id="mutating" class="section level2">
 <h2><span class="header-section-number">4.3</span> Mutating</h2>
@@ -272,18 +310,50 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <hr />
 <p>Aside from the <code>mutate_at()</code> function there is a <code>mutate_if()</code> function that will apply your logic “if” a column meets a certain criteria that you specify. This is a very handy function if, for example, you want to convert multiple columns that are character strings into integers.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#mutate_if(is.character, as.numeric)</span></code></pre></div>
-<hr />
 </div>
-<div id="grouped-mutates" class="section level2">
-<h2><span class="header-section-number">4.4</span> Grouped Mutates</h2>
+<div id="mutating-within-groups" class="section level2">
+<h2><span class="header-section-number">4.4</span> Mutating within Groups</h2>
 <p>A particularly challenging type of transformation in Excel is creating variables based on a group of records and applying it across all rows for the group. For example, calculating the difference between an individual’s maximum value compared to all other values. This requires finding the maximum for the group, then comparing it with each observation for the group. Typically, you might accomplish this through the creation of a Pivot Table and then using <code>VLOOKUP</code> to reference the maximum per individual. This gets unwieldly (sp) when then data changes. In R you can take the observations in a dataset and put them into groups based on a variable. In the example below, we have simply taken the dataset and modified it to remember that operations should be done in their respective group. Nothing has actually been changed on the data yet, but it is ready for an operation that acts upon the grouped data. The next step is to create that variable we mentioned above that represents the difference between the maximum value for the individual and each of their corresponding observations. In this example, we’ll also create another variable indicating <code>TRUE/FALSE</code> whether the row is the maximum to provide a visual cue and filtering mechanism to throw out those specific observations if desired.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># dat %&gt;%</span>
 <span class="co">#   group_by()</span></code></pre></div>
 </div>
 <div id="summarizing" class="section level2">
 <h2><span class="header-section-number">4.5</span> Summarizing</h2>
-<p>In the spirit of transforming data we will talk about summarizing it. A summary is just a transformation of underlying source data to a new form. Before summarizing data you must first have an idea about how to summarize it. Ask yourself: Do I want to count rows? Unique instances? Do I want to calculate the average? Standard deviation? Excel users often summarize using a Pivot Table which has the summarizing functions <code>COUNT</code>, <code>COUNTA</code>, <code>AVERAGE</code>, <code>STDEV</code>, <code>MAX</code>, and <code>MIN</code> to name a few. These are very similar to what exists in R and below is a table that translates each of these summary methods to their equivalent counterpart in R.</p>
-<p>[INSERT TABLE HERE]</p>
+<p>In the spirit of transforming data we will talk about summarizing it. A summary is just a transformation of underlying source data to a new form. Before summarizing data you must first have an idea about how to summarize it. Ask yourself: Do I want to count rows? Unique instances? Do I want to calculate the average? Standard deviation? Excel users often summarize using a Pivot Table which has the summarizing functions <code>COUNT</code>, <code>AVERAGE</code>, <code>MAX</code> to name a few. These are very similar to what exists in R and below is a table that translates each of these summary methods to their equivalent counterpart in R.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Excel Function</th>
+<th>R Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>COUNT</td>
+<td><code>n()</code> or <code>length()</code></td>
+</tr>
+<tr class="even">
+<td>SUM</td>
+<td><code>sum()</code></td>
+</tr>
+<tr class="odd">
+<td>AVERAGE</td>
+<td><code>mean()</code></td>
+</tr>
+<tr class="even">
+<td>STDEV</td>
+<td><code>sd()</code></td>
+</tr>
+<tr class="odd">
+<td>MAX</td>
+<td><code>max()</code></td>
+</tr>
+<tr class="even">
+<td>MIN</td>
+<td><code>min()</code></td>
+</tr>
+</tbody>
+</table>
 <p>Below is an example in R of how to count the number of observations and compute the average.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">summarise</span>(<span class="dt">n =</span> <span class="kw">n</span>(), <span class="dt">mean=</span><span class="kw">mean</span>(Petal.Length))
@@ -309,9 +379,39 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 <span class="co">#&gt;       n  mean</span>
 <span class="co">#&gt;   &lt;int&gt; &lt;dbl&gt;</span>
 <span class="co">#&gt; 1    50  1.46</span></code></pre></div>
-<p>In Excel you would implement this as a formula <code>AVERAGEIF(E2:E150, &quot;setosa&quot;, A2:A150)</code>. To reiterate, in R filtering just means that you remove any rows from a dataset that meet a certain criteria. This is helpful in a pipeline because it will remove the observations while performing that pipeline calculation without removing them from the original dataset you placed at the top of the pipeline. The symbols for doing comparisons, also called “logical operators”, are pretty much the same in Excel as they are in R. One key difference is that if you are checking whether two things are equal to each other in R, then you will need to use double equal signs (<code>A2==B2</code>) rather than the single equals sign that Excel uses <code>A2=B2</code>. Below is a table that shows how these operators are different in R compared to Excel</p>
-<p>[INSERT TABLE HERE]</p>
-<p>In the example below we show multiple of these operators in action to show how they can be used together to select a very small subset of observations from a data set.</p>
+<p>In Excel you would implement this as a formula <code>AVERAGEIF(E2:E150, &quot;setosa&quot;, A2:A150)</code>. To reiterate, in R filtering just means that you remove any rows from a dataset that meet a certain criteria. This is helpful in a pipeline because it will remove the observations while performing that pipeline calculation without removing them from the original dataset you placed at the top of the pipeline. The symbols for doing comparisons, also called “logical operators”, are pretty much the same in Excel as they are in R. One key difference is that if you are checking whether two things are equal to each other in R, then you will need to use double equal signs (<code>A2==B2</code>) rather than the single equals sign that Excel uses <code>A2=B2</code>. Below is a table that shows where these operators are different in R compared to Excel.</p>
+<table>
+<thead>
+<tr class="header">
+<th>Behavior</th>
+<th>Excel Function</th>
+<th>R Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Equal</td>
+<td><code>=</code></td>
+<td><code>==</code></td>
+</tr>
+<tr class="even">
+<td>Not Equal</td>
+<td><code>&lt;&gt;</code></td>
+<td><code>!=</code></td>
+</tr>
+<tr class="odd">
+<td>Or</td>
+<td><code>OR()</code></td>
+<td><code>|</code></td>
+</tr>
+<tr class="even">
+<td>And</td>
+<td><code>AND()</code></td>
+<td><code>&amp;</code></td>
+</tr>
+</tbody>
+</table>
+<p>The operators such as <code>&lt;</code>, <code>&gt;</code>, <code>&lt;=</code>, <code>&gt;=</code> are the same in R as they are in Excel. In the example below we show multiple of these operators in action to show how they can be used together to select a very small subset of observations from a data set.</p>
 <div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span>
 <span class="st">  </span><span class="kw">filter</span>(Species <span class="op">==</span><span class="st"> &#39;setosa&#39;</span>,
          <span class="op">!</span>(Petal.Length <span class="op">==</span><span class="st"> </span><span class="fl">1.4</span> <span class="op">|</span><span class="st"> </span>Petal.Length <span class="op">==</span><span class="st"> </span><span class="fl">1.5</span>),
@@ -324,18 +424,43 @@ code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Inf
 </div>
 <div id="spread-and-gather" class="section level2">
 <h2><span class="header-section-number">4.6</span> Spread and Gather</h2>
-<p>One particular type of transformation is moving the data between a “long” format and a “wide” format. In the wide format each metric might be in its own column. If you have 20 metrics then the dataset will have at least 20 columns and it starts to become wider than it is long.</p>
-<hr />
-<p>FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS [INCLUDE LONG EXAMPLE]</p>
-<hr />
+<p>One particular type of transformation is moving the data between a “long” format and a “wide” format. In the “wide” format each metric might be in its own column. If you have 20 metrics then the dataset will have at least 20 columns and it starts to become wider than it is long, hence the name. The alternative is to take each of the 20 columns per observation and rearrange them longways where each column becomes a row. The data becomes much longer than it is wide, hence the name “long” format.</p>
 <p>The long format is usually more preferable because functions like <code>filter()</code>, <code>group_by()</code>, and <code>summarize()</code> can operate quickly across rows rather than columns. In addition, the long format is more compatible with the <code>ggplot()</code> plotting function to specify multiple series, colors, and facets.</p>
 <hr />
+<p>FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS [INCLUDE LONG EXAMPLE]</p>
 <p>SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS</p>
 <hr />
 </div>
 <div id="functions" class="section level2">
 <h2><span class="header-section-number">4.7</span> Functions</h2>
-<p>In some cases</p>
+<p>Functions are powerful. They encapsulate a specific piece of logic that can be executed on-demand. Functions are the core component to almost every R package. The <strong>dplyr</strong> package has a few functions that make it efficient to call your own functions. For this reason we will discuss the basic of writing a function and using it in a data pipeline. Let’s consider a made up function called <code>version2()</code> that appends the string &quot; - V2&quot; at the end of other character strings.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">version2 &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="kw">paste</span>(x, <span class="st">&quot;- V2&quot;</span>)
+}</code></pre></div>
+<p>In other examples we have used the assignment operator (<code>&lt;-</code>) to save results or data into an object. In this case we are assigning some logic defined by the <code>function()</code> function to the object <code>version2</code>. We provide the <code>x</code> arugment as a placeholder for what users of the function should provide and then write the logic for how to handle <code>x</code>. In this case, the function should take <code>x</code> from the user’s input to the function and paste <code>&quot;- V2&quot;</code> onto it. When writing functions it is helpful to assign a value to the argument (<code>x</code> in this case) and see how it works. When you are done testing the logic, then place everything inside the curly braces of <code>function(){}</code>. If the code does not work on its own, then it will not work inside the function. Here is a small example of how our function should behave:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;name&quot;</span>
+<span class="kw">paste</span>(x, <span class="st">&quot;- V2&quot;</span>)
+<span class="co">#&gt; [1] &quot;name - V2&quot;</span></code></pre></div>
+<p>You can see that the function performs the exact same operation:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> &quot;name&quot;</span>
+<span class="kw">version2</span>(x)
+<span class="co">#&gt; [1] &quot;name - V2&quot;</span></code></pre></div>
+<p>Now the interesting part is if you want to rename all of the column names in a dataset, according to this logic. The <code>rename_all()</code> function takes a list of functions as an input (<code>.funs = list()</code>). In this case we can supply the <code>version2()</code> function that we have created.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">as_tibble</span>(iris) <span class="op">%&gt;%</span><span class="st"> </span>
+<span class="st">  </span><span class="kw">rename_all</span>(version2)
+<span class="co">#&gt; # A tibble: 150 x 5</span>
+<span class="co">#&gt;   `Sepal.Length -… `Sepal.Width - … `Petal.Length -… `Petal.Width - …</span>
+<span class="co">#&gt;              &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;            &lt;dbl&gt;</span>
+<span class="co">#&gt; 1              5.1              3.5              1.4              0.2</span>
+<span class="co">#&gt; 2              4.9              3                1.4              0.2</span>
+<span class="co">#&gt; 3              4.7              3.2              1.3              0.2</span>
+<span class="co">#&gt; 4              4.6              3.1              1.5              0.2</span>
+<span class="co">#&gt; 5              5                3.6              1.4              0.2</span>
+<span class="co">#&gt; 6              5.4              3.9              1.7              0.4</span>
+<span class="co">#&gt; # ... with 144 more rows, and 1 more variable: `Species - V2` &lt;fct&gt;</span></code></pre></div>
+<p>This is a simple example of having a custom function to define the column names of a dataset. A more common example is to perform an operation on some data and combine it all back together in a dataset. The <strong>dplyr</strong> package has a function called <code>map_df()</code>, which runs a function against every element in an object and ensures that the result of the function for each element is combined back into a single dataset.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co">#map_df EXAMPLE HERE</span></code></pre></div>
+<p>If you are copy/pasting the same piece of code to run in multiple places, then it is probably a good sign that a function should be written to contain that logic and execute it in a consistent way. Functions make code easier to maintain and they typically run faster than loops or other programming structures.</p>
 </div>
 <div id="putting-it-all-together" class="section level2">
 <h2><span class="header-section-number">4.8</span> Putting it all together</h2>

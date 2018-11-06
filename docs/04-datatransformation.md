@@ -7,27 +7,23 @@ data with the tidyverse package **dplyr**. Using these functions are the best wa
 reduce the overall amount of time spent on data cleaning and to create reproducible 
 workflows whenever you receive new data.
 
+
+
 ## Data Pipelines
 
-Before diving into the functions designed to help you transform data, we must cover 
+Before diving into the functions designed to help you transform data, we must introduce 
 a perculiar looking operator, the pipe or `%>%`. You will repeatedly see the pipe 
 (`%>%`) used in the code examples for this chapter and in other parts of the book. 
 This operator takes output from the function on its left side and passes it onto the 
 function on its right side. As an example we will look at the `select()` function. 
-The first argument in the function is `.data`. Whenever you use the pipe operator 
-it will pass that output into the function's first argument, which in this case, 
+The first argument in the `select()` function is `.data`. Whenever you use the pipe 
+operator it will pass that output into the function's first argument, which in this case, 
 is a `tbl_df`. This means that we must put a `tbl_df` object (a dataset) on the 
 left side of the pipe operator and then the `select()` function on the right. 
-The first argument is assumed to be the data, so the remaining argument inside 
-the function, according to the documentation, should be one or more unquoted variable 
-names or numbers representing the position of columns. If we put this together, 
-the command looks like this: 
 
 
 ```r
-library(tidyverse)
-as_tibble(iris) %>% 
-  select(Petal.Length, Sepal.Length, Species)
+as_tibble(iris) %>% select(Petal.Length, Sepal.Length, Species)
 #> # A tibble: 150 x 3
 #>   Petal.Length Sepal.Length Species
 #>          <dbl>        <dbl> <fct>  
@@ -40,17 +36,22 @@ as_tibble(iris) %>%
 #> # ... with 144 more rows
 ```
 
+The first argument is assumed to be the data, so the remaining argument inside 
+the function, according to the documentation, should be one or more unquoted variable 
+names or numbers representing the position of columns.
+
 The pipe is the glue for putting together multiple data transformations into a sequence. 
 The benefits to using the pipe are that it reduces the amount of code needed to 
-perform a sequence of operations.
+perform a sequence of operations and it is easy to read the flow of operations.  
 
 ## Selecting
 
 It is common to have a dataset with more columns than you need or have helper columns 
-that you've created but no longer need. In the section above we demonstrated how 
+that you would like to remove. In the section above we demonstrated how 
 to use the `select()` function with the pipe operator to pull out only the columns 
-you want to work with. The select function has the nice feature of also being able 
-to rename columns as you select them. For example,
+you want to work with. The `select()` function has the nice feature of also being 
+able to rename columns as you select them. In the example below we select out three 
+columns while renaming two of them.
 
 
 ```r
@@ -68,10 +69,10 @@ as_tibble(iris) %>%
 #> # ... with 144 more rows
 ```
 
-There is another function in **dplyr** called `rename()`, however, this can conflict 
-with a function in the **plyr** package also named `rename()` if you have both packages 
-loaded at the same time. To avoid confusion about which function to use you can 
-reference the function you want using the package name and a double colon before 
+Note that there is another function in **dplyr** called `rename()`; however, this 
+can conflict with a function in the **plyr** package also named `rename()` if you have 
+both packages loaded at the same time. To avoid confusion about which function to use 
+you can reference the function you want using the package name and a double colon before 
 the function like so, `dplyr::rename()`. This notation specifies the function and 
 where to retrieve its definition, in this case, the **dplyr** package. If you would 
 like to avoid this package function conflict, using just the `select()` function 
@@ -101,12 +102,16 @@ as_tibble(iris) %>%
 ```
 **FIND EXAMPLE THAT MATCHES TEXT ABOVE IT**
 
-***
-SHOULD WE DISCUSS THE VARIANTS OF SELECT?
-The `select_helpers` make it convenient to specify many variables at once without 
-having to type them all out individually.  
-
-***
+Function | Behavior
+----------|----------
+`starts_with()` |  Starts with a prefix.
+`ends_with()` |  Ends with a suffix.
+`contains()` |  Contains a literal string.
+`matches()` |  Matches a regular expression.
+`num_range()` |  Matches a numerical range like x01, x02, x03.
+`one_of()` |  Matches variable names in a character vector.
+`everything()` |  Matches all variables.
+`last_col()` |  Select last variable, possibly with an offset.
 
 ## Mutating
 
@@ -204,9 +209,7 @@ are character strings into integers.
 #mutate_if(is.character, as.numeric)
 ```
 
-***
-
-## Grouped Mutates
+## Mutating within Groups
 
 A particularly challenging type of transformation in Excel is creating variables 
 based on a group of records and applying it across all rows for the group. For example, 
@@ -238,11 +241,18 @@ is just a transformation of underlying source data to a new form. Before summari
 data you must first have an idea about how to summarize it. Ask yourself: Do I want 
 to count rows? Unique instances? Do I want to calculate the average? Standard deviation? 
 Excel users often summarize using a Pivot Table which has the summarizing functions 
-`COUNT`, `COUNTA`, `AVERAGE`, `STDEV`, `MAX`, and `MIN` to name a few. These are very 
-similar to what exists in R and below is a table that translates each of these summary 
-methods to their equivalent counterpart in R.
+`COUNT`, `AVERAGE`, `MAX` to name a few. These are very similar to what exists in 
+R and below is a table that translates each of these summary methods to their equivalent 
+counterpart in R.
 
-[INSERT TABLE HERE]
+Excel Function | R Function
+----------|----------
+COUNT | `n()` or `length()`
+SUM | `sum()`
+AVERAGE | `mean()`
+STDEV | `sd()`
+MAX | `max()`
+MIN | `min()`
 
 Below is an example in R of how to count the number of observations and compute 
 the average.
@@ -303,12 +313,18 @@ doing comparisons, also called "logical operators", are pretty much the same in 
 as they are in R. One key difference is that if you are checking whether two things 
 are equal to each other in R, then you will need to use double equal signs (`A2==B2`) 
 rather than the single equals sign that Excel uses `A2=B2`. Below is a table that 
-shows how these operators are different in R compared to Excel
+shows where these operators are different in R compared to Excel.
 
-[INSERT TABLE HERE]
+Behavior | Excel Function | R Function
+----------|----------|----------
+Equal | `=` | `==`
+Not Equal | `<>` | `!=`
+Or | `OR()` | `|`
+And | `AND()` | `&`
 
-In the example below we show multiple of these operators in action to show how they 
-can be used together to select a very small subset of observations from a data set. 
+The operators such as `<`, `>`, `<=`, `>=` are the same in R as they are in Excel. In the 
+example below we show multiple of these operators in action to show how they can 
+be used together to select a very small subset of observations from a data set. 
 
 
 ```r
@@ -326,15 +342,11 @@ as_tibble(iris) %>%
 ## Spread and Gather
 
 One particular type of transformation is moving the data between a "long" format and 
-a "wide" format. In the wide format each metric might be in its own column. If you 
+a "wide" format. In the "wide" format each metric might be in its own column. If you 
 have 20 metrics then the dataset will have at least 20 columns and it starts to 
-become wider than it is long.
-
-***
-FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS
-[INCLUDE LONG EXAMPLE]  
-
-***
+become wider than it is long, hence the name. The alternative is to take each of 
+the 20 columns per observation and rearrange them longways where each column becomes 
+a row. The data becomes much longer than it is wide, hence the name "long" format.  
 
 The long format is usually more preferable because functions like `filter()`, 
 `group_by()`, and `summarize()` can operate quickly across rows rather than columns. 
@@ -342,13 +354,93 @@ In addition, the long format is more compatible with the `ggplot()` plotting fun
 to specify multiple series, colors, and facets. 
 
 ***
+FIGURE OUT AN EXAMPLE THAT IS REALLY REPRESENTATIVE OF THIS
+[INCLUDE LONG EXAMPLE]  
+
 SHOULD WE SHOW AN EXAMPLE OF GGPLOT HERE? OTHER IDEAS/REASONS  
 
 ***
 
 ## Functions
 
-In some cases
+Functions are powerful. They encapsulate a specific piece of logic that can be 
+executed on-demand. Functions are the core component to almost every R package. 
+The **dplyr** package has a few functions that make it efficient to call your own 
+functions. For this reason we will discuss the basic of writing a function and using 
+it in a data pipeline. Let's consider a made up function called `version2()` that 
+appends the string " - V2" at the end of other character strings.
+
+
+```r
+version2 <- function(x){
+  paste(x, "- V2")
+}
+```
+
+In other examples we have used the assignment operator (`<-`) to save results or 
+data into an object. In this case we are assigning some logic defined by the `function()` 
+function to the object `version2`. We provide the `x` arugment as a placeholder 
+for what users of the function should provide and then write the logic for how to 
+handle `x`. In this case, the function should take `x` from the user's input to the 
+function and paste `"- V2"` onto it. When writing functions it is helpful to assign 
+a value to the argument (`x` in this case) and see how it works. When you are done 
+testing the logic, then place everything inside the curly braces of `function(){}`. 
+If the code does not work on its own, then it will not work inside the function. 
+Here is a small example of how our function should behave: 
+
+
+```r
+x <- "name"
+paste(x, "- V2")
+#> [1] "name - V2"
+```
+
+You can see that the function performs the exact same operation: 
+
+
+```r
+x <- "name"
+version2(x)
+#> [1] "name - V2"
+```
+
+Now the interesting part is if you want to rename all of the column names in a dataset, 
+according to this logic. The `rename_all()` function takes a list of functions as 
+an input (`.funs = list()`). In this case we can supply the `version2()` function 
+that we have created.
+
+
+```r
+as_tibble(iris) %>% 
+  rename_all(version2)
+#> # A tibble: 150 x 5
+#>   `Sepal.Length -… `Sepal.Width - … `Petal.Length -… `Petal.Width - …
+#>              <dbl>            <dbl>            <dbl>            <dbl>
+#> 1              5.1              3.5              1.4              0.2
+#> 2              4.9              3                1.4              0.2
+#> 3              4.7              3.2              1.3              0.2
+#> 4              4.6              3.1              1.5              0.2
+#> 5              5                3.6              1.4              0.2
+#> 6              5.4              3.9              1.7              0.4
+#> # ... with 144 more rows, and 1 more variable: `Species - V2` <fct>
+```
+
+This is a simple example of having a custom function to define the column names of 
+a dataset. A more common example is to perform an operation on some data and combine 
+it all back together in a dataset. The **dplyr** package has a function called 
+`map_df()`, which runs a function against every element in an object and ensures 
+that the result of the function for each element is combined back into a single 
+dataset.
+
+
+```r
+#map_df EXAMPLE HERE
+```
+
+If you are copy/pasting the same piece of code to run in multiple places, then it 
+is probably a good sign that a function should be written to contain that logic 
+and execute it in a consistent way. Functions make code easier to maintain and they 
+typically run faster than loops or other programming structures. 
 
 ## Putting it all together
 
